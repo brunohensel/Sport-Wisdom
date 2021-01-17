@@ -48,6 +48,8 @@ android {
 
 dependencies {
 
+  implementation project(":redux")
+
   //Kotlin
   implementation Dependencies.kotlin_standard_library
   implementation Dependencies.ktx
