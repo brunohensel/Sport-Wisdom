@@ -1,9 +1,9 @@
 package com.example.sportwisdom.features.dashboard.domain.state
 
-import com.example.sportwisdom.features.dashboard.domain.model.SportsModel
+import com.example.sportwisdom.features.dashboard.domain.model.League
 
 data class DashboardState(
-  val sportsModel: SportsModel,
+  val sportsModel: Map<String, List<League>>,
   val syncState: DashboardSyncState
 )
 

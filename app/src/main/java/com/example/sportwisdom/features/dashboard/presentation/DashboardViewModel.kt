@@ -16,7 +16,7 @@ class DashboardViewModel @ViewModelInject constructor(
   reducer: DashboardReducer,
   actionCreator: DashboardActionCreator
 ): BaseStateViewModel<DashboardState, DashboardEvent, BaseAction>(
-  initialState = DashboardState(sportsModel = SportsModel(leagues = emptyList()), syncState = DashboardSyncState.Content),
+  initialState = DashboardState(sportsModel = mapOf(), syncState = DashboardSyncState.Content),
   reducer = reducer,
   action = actionCreator
 )

@@ -24,7 +24,6 @@ class MainActivity : AppCompatActivity() {
 
     lifecycleScope.launchWhenCreated { viewModel.process(listOf(DashboardEvent.fetchSports).asFlow()) }
 
-
     lifecycleScope.launchWhenStarted {
       viewModel
         .state
