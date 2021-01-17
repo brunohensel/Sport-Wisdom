@@ -1,6 +1,7 @@
 package com.example.sportwisdom.di
 
 import com.example.sportwisdom.BuildConfig
+import com.example.sportwisdom.features.apiservice.SportApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -51,5 +52,11 @@ object NetworkModule {
       .baseUrl(BuildConfig.BASE_URL)
       .addConverterFactory(MoshiConverterFactory.create(moshi))
       .build()
+  }
+
+  @Singleton
+  @Provides
+  fun provideSportApi(retrofit: Retrofit): SportApiService {
+    return retrofit.create(SportApiService::class.java)
   }
 }
