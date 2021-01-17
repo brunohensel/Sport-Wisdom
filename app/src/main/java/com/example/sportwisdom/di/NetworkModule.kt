@@ -1,5 +1,6 @@
 package com.example.sportwisdom.di
 
+import com.example.sportwisdom.BuildConfig
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -47,7 +48,7 @@ object NetworkModule {
   fun provideRetrofit(client: OkHttpClient): Retrofit {
     return Retrofit.Builder()
       .client(client)
-      .baseUrl("BuildConfig.BASE_URL")
+      .baseUrl(BuildConfig.BASE_URL)
       .addConverterFactory(MoshiConverterFactory.create(moshi))
       .build()
   }
