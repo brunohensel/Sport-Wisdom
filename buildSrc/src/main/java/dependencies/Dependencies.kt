@@ -18,4 +18,5 @@ object Dependencies {
     const val room = "androidx.room:room-runtime:${Versions.room_version}"
     const val room_ext = "androidx.room:room-ktx:${Versions.room_version}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber_version}"
+    const val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin_version}"
 }

@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    lifecycleScope.launchWhenCreated { viewModel.process(listOf(DashboardEvent.fetchSports).asFlow()) }
+    lifecycleScope.launchWhenCreated { viewModel.process(listOf(DashboardEvent.FetchSports).asFlow()) }
 
     lifecycleScope.launchWhenStarted {
       viewModel

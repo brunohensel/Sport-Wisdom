@@ -55,6 +55,7 @@ dependencies {
   implementation Dependencies.ktx
   implementation Dependencies.coroutines_core
   implementation Dependencies.coroutines_android
+  implementation Dependencies.mockito_kotlin
 
   //Architecture component ktx scopes
   implementation Dependencies.viewModel_scope
@@ -94,6 +95,7 @@ dependencies {
 
   //Unit tests
   testImplementation TestDependencies.junit4
+  testImplementation TestDependencies.mockito_inline_testing
   testImplementation TestDependencies.room_testing
   testImplementation TestDependencies.coroutines_testing
   testImplementation TestDependencies.truth_testing

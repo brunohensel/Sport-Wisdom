@@ -23,4 +23,6 @@ object Versions {
     const val room_version = "2.2.6"
     const val truth_version = "1.1"
     const val timber_version = "4.7.1"
+    const val mockito_inline_version = "3.3.3"
+    const val mockito_kotlin_version = "2.2.0"
 }

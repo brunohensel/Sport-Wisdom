@@ -16,7 +16,7 @@ class DashboardActionCreator @Inject constructor(private val repository: Dashboa
   override fun invoke(event: DashboardEvent): Flow<BaseAction> {
     return flow {
       val result = when (event) {
-        DashboardEvent.fetchSports -> repository.fetchAllSports()
+        DashboardEvent.FetchSports -> repository.fetchAllSports()
       }
       emit(result)
     }
