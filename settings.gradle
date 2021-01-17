@@ -1,2 +1,3 @@
+include ':Redux'
 include ':app'
 rootProject.name = "Sport Wisdom"

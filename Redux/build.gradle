@@ -1,0 +1,14 @@
+import dependencies.Dependencies
+
+plugins {
+    id 'java-library'
+    id 'kotlin'
+}
+
+dependencies {
+    //Kotlin
+    implementation Dependencies.kotlin_standard_library
+    implementation Dependencies.ktx
+    implementation Dependencies.coroutines_core
+    implementation Dependencies.coroutines_android
+}
