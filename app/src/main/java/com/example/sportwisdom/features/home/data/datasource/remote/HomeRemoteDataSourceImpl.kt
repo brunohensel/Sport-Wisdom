@@ -1,9 +1,10 @@
-package com.example.sportwisdom.features.home.sports.data.datasource.remote
+package com.example.sportwisdom.features.home.data.datasource.remote
 
 import com.example.sportwisdom.base.BaseAction
 import com.example.sportwisdom.base.BaseApiResponseHandler
 import com.example.sportwisdom.features.apiservice.SportApiService
-import com.example.sportwisdom.features.home.sports.domain.model.LeagueDto
+import com.example.sportwisdom.features.home.league.domain.model.LeagueDto
+import com.example.sportwisdom.features.home.league.domain.model.LeagueModel
 import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
 import com.example.sportwisdom.util.safeApiCall
 import kotlinx.coroutines.Dispatchers.IO
@@ -13,11 +14,11 @@ import javax.inject.Inject
 
 class HomeRemoteDataSourceImpl @Inject constructor(private val sportApiService: SportApiService) : HomeRemoteDataSource {
 
-  override suspend fun fetchAllLeagues(): Flow<BaseAction> = flow {
-    val networkResult = safeApiCall(IO) { sportApiService.fetchAllLeagues().leagues.groupBy { it.sportType } }
-    val response = object : BaseApiResponseHandler<Map<String, List<LeagueDto>>>(apiResult = networkResult) {
-      override suspend fun handleSuccess(resultObj: Map<String, List<LeagueDto>>): BaseAction.Success<Map<String, List<LeagueDto>>> {
-        return BaseAction.Success(resultObj)
+  override suspend fun fetchAllLeagues(sportType: String): Flow<BaseAction> = flow {
+    val networkResult = safeApiCall(IO) { sportApiService.fetchAllLeagues().leagues }
+    val response = object : BaseApiResponseHandler<List<LeagueDto>>(apiResult = networkResult) {
+      override suspend fun handleSuccess(resultObj: List<LeagueDto>): BaseAction.Success<List<LeagueDto>> {
+        return BaseAction.Success(resultObj.filter { it.sportType == sportType })
       }
     }.getResult()
     emit(response)

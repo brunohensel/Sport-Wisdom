@@ -7,7 +7,7 @@ import com.example.sportwisdom.features.home.sports.domain.state.HomeState
 import com.example.sportwisdom.features.home.sports.domain.state.HomeSyncState
 import javax.inject.Inject
 
-class HomeReducer @Inject constructor() : Reducer<HomeState, BaseAction> {
+class SportsReducer @Inject constructor() : Reducer<HomeState, BaseAction> {
 
   override fun invoke(currentState: HomeState, action: BaseAction): HomeState {
     return when (action){

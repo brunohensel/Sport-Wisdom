@@ -1,6 +1,6 @@
 package com.example.sportwisdom.features.apiservice
 
-import com.example.sportwisdom.features.home.sports.domain.model.LeagueModel
+import com.example.sportwisdom.features.home.league.domain.model.LeagueModel
 import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
 import retrofit2.http.GET
 

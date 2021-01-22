@@ -1,8 +1,8 @@
-package com.example.sportwisdom.features.home.sports.domain.reducer
+package com.example.sportwisdom.features.home.domain
 
 import com.example.redux.Action
 import com.example.sportwisdom.base.BaseAction
-import com.example.sportwisdom.features.home.sports.data.HomeRepository
+import com.example.sportwisdom.features.home.data.HomeRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flattenMerge
@@ -16,7 +16,7 @@ class HomeActionCreator @Inject constructor(private val repository: HomeReposito
   override fun invoke(event: HomeEvent): Flow<BaseAction> {
     return flow {
       val result = when (event) {
-        HomeEvent.FetchLeagues -> repository.fetchAllLeagues()
+        is HomeEvent.FetchLeagues -> repository.fetchAllLeagues(event.sportType)
         HomeEvent.FetchSports  -> repository.fetchAllSports()
       }
       emit(result)

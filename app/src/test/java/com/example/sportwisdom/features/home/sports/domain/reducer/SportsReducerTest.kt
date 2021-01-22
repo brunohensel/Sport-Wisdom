@@ -7,7 +7,7 @@ import com.example.sportwisdom.features.home.sports.domain.state.HomeSyncState
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
-class HomeReducerTest {
+class SportsReducerTest {
 
   @Test
   fun loading_test() {
@@ -17,7 +17,7 @@ class HomeReducerTest {
     val currentState = HomeState(sportsModel = sports, syncState = HomeSyncState.Content)
 
     //When
-    val newState = HomeReducer().invoke(currentState, action)
+    val newState = SportsReducer().invoke(currentState, action)
 
     //Then
     assertThat(newState.syncState).isEqualTo(HomeSyncState.Loading)
@@ -31,7 +31,7 @@ class HomeReducerTest {
     val currentState = HomeState(sports, HomeSyncState.Loading)
 
     //When
-    val newState = HomeReducer().invoke(currentState, action)
+    val newState = SportsReducer().invoke(currentState, action)
 
     //Then
     assertThat(newState.syncState).isEqualTo(HomeSyncState.Content)

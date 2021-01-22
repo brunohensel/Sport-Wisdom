@@ -1,9 +1,9 @@
-package com.example.sportwisdom.features.home.sports.domain.reducer
+package com.example.sportwisdom.features.home.domain
 
 import com.example.sportwisdom.CoroutineTestRule
 import com.example.sportwisdom.base.BaseAction
-import com.example.sportwisdom.features.home.sports.data.HomeRepository
-import com.example.sportwisdom.features.home.sports.domain.model.LeagueDto
+import com.example.sportwisdom.features.home.data.HomeRepository
+import com.example.sportwisdom.features.home.league.domain.model.LeagueDto
 import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.given
@@ -34,24 +34,31 @@ class HomeActionCreatorTest {
   @Test
   fun fetchLeagues_returnMapOf_whenSuccess() = runBlockingTest {
     //Given
-    val event = HomeEvent.FetchLeagues
-    val map = mapOf("Soccer" to listOf<LeagueDto>())
-    repository.fetchAllLeagues() willReturn flowOf(BaseAction.Success(map))
+    val sportType = "Soccer"
+    val event = HomeEvent.FetchLeagues(sportType)
+    val leagues = arrayListOf<LeagueDto>().apply {
+      add(LeagueDto("1", "A","Soccer"))
+      add(LeagueDto("2", "B","Baseball"))
+    }
+    val response = leagues.filter { it.sportType == sportType }
+    repository.fetchAllLeagues(sportType) willReturn flowOf(BaseAction.Success(response))
 
     //When
     val result = actionCreator.invoke(event)
 
     //Then
     assertThat(result.count()).isEqualTo(2)
+    assertThat(response.first().sportType).isEqualTo(sportType)
     assertThat(result.take(1).toList()).contains(BaseAction.Executing)
-    assertThat(result.take(2).toList()).contains(BaseAction.Success(map))
+    assertThat(result.take(2).toList()).contains(BaseAction.Success(response))
   }
 
   @Test
   fun fetchLeagues_returnFailed_whenError() = runBlockingTest {
     //Given
-    val event = HomeEvent.FetchLeagues
-    whenever(repository.fetchAllLeagues()).thenReturn(flowOf(BaseAction.Failed(null, "Unknown network error")))
+    val sportType = "soccer"
+    val event = HomeEvent.FetchLeagues(sportType)
+    whenever(repository.fetchAllLeagues(sportType)).thenReturn(flowOf(BaseAction.Failed(null, "Unknown network error")))
 
     //When
     val result = actionCreator.invoke(event)

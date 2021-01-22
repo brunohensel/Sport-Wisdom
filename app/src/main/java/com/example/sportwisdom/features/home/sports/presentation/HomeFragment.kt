@@ -7,9 +7,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.sportwisdom.R
+import com.example.sportwisdom.features.home.domain.HomeEvent
 import com.example.sportwisdom.features.home.sports.domain.model.SportDto
-import com.example.sportwisdom.features.home.sports.domain.reducer.HomeEvent
 import com.example.sportwisdom.features.home.sports.domain.state.HomeSyncState
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexWrap
@@ -28,8 +29,7 @@ import timber.log.Timber
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
   private val viewModel: HomeViewModel by viewModels()
-  private val homeAdapter by lazy { HomeAdapter() }
-  private lateinit var flexboxManager: FlexboxLayoutManager
+  private val homeAdapter by lazy { HomeAdapter(::onItemClicked) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -49,25 +49,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
   }
 
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-    flexboxManager = FlexboxLayoutManager(context).apply {
-      flexWrap = FlexWrap.WRAP
-      justifyContent = JustifyContent.SPACE_AROUND
-      alignItems = AlignItems.CENTER
-    }
-  }
-
   private fun displayAllSports(sports: List<SportDto>) {
     progressBar.isVisible = false
     homeAdapter.submitList(sports)
+  }
+
+  private fun onItemClicked(sportType: SportDto) {
+    val action = HomeFragmentDirections.actionHomeFragmentToLeagueFragment(sportType)
+    findNavController().navigate(action)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     rvHomeSports.apply {
       adapter = homeAdapter
-      layoutManager = flexboxManager
+      layoutManager = FlexboxLayoutManager(context).apply {
+        flexWrap = FlexWrap.WRAP
+        justifyContent = JustifyContent.SPACE_AROUND
+        alignItems = AlignItems.CENTER
+      }
     }
   }
 }

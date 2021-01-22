@@ -8,27 +8,27 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
-import coil.transform.RoundedCornersTransformation
 import com.example.sportwisdom.R
 import com.example.sportwisdom.features.home.sports.domain.model.SportDto
 import kotlinx.android.synthetic.main.item_home_sports.view.*
 
-class HomeAdapter : ListAdapter<SportDto, HomeAdapter.HomeViewHolder>(HomeAdapter) {
+class HomeAdapter(private val onItemClick: (SportDto) -> Unit) : ListAdapter<SportDto, HomeAdapter.HomeViewHolder>(HomeAdapter) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
     return HomeViewHolder.from(parent)
   }
 
   override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-    holder.bind(getItem(position))
+    holder.bind(getItem(position), onItemClick)
   }
 
-  class HomeViewHolder private constructor(itemView: View): RecyclerView.ViewHolder(itemView){
+  class HomeViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun bind(data: SportDto){
-      with(itemView){
+    fun bind(data: SportDto, onItemClick: (SportDto) -> Unit) {
+      with(itemView) {
+        ctlSports.setOnClickListener { onItemClick(data) }
         txtSportType.text = data.strSport
-        imgHomeSport.load(data.strSportThumb){
+        imgHomeSport.load(data.strSportThumb) {
           crossfade(true)
           crossfade(700)
           transformations(CircleCropTransformation())
@@ -36,8 +36,8 @@ class HomeAdapter : ListAdapter<SportDto, HomeAdapter.HomeViewHolder>(HomeAdapte
       }
     }
 
-    companion object{
-      fun from(parent: ViewGroup): HomeViewHolder{
+    companion object {
+      fun from(parent: ViewGroup): HomeViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.item_home_sports, parent, false)
         return HomeViewHolder(view)
@@ -45,7 +45,7 @@ class HomeAdapter : ListAdapter<SportDto, HomeAdapter.HomeViewHolder>(HomeAdapte
     }
   }
 
-  private companion object : DiffUtil.ItemCallback<SportDto>(){
+  private companion object : DiffUtil.ItemCallback<SportDto>() {
     override fun areItemsTheSame(oldItem: SportDto, newItem: SportDto): Boolean {
       return oldItem.idSport == newItem.idSport
     }

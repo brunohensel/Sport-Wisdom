@@ -1,4 +1,4 @@
-package com.example.sportwisdom.features.home.sports.domain.model
+package com.example.sportwisdom.features.home.league.domain.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

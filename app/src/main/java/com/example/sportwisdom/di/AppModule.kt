@@ -1,10 +1,10 @@
 package com.example.sportwisdom.di
 
 import com.example.sportwisdom.features.apiservice.SportApiService
-import com.example.sportwisdom.features.home.sports.data.HomeRepository
-import com.example.sportwisdom.features.home.sports.data.HomeRepositoryImpl
-import com.example.sportwisdom.features.home.sports.data.datasource.remote.HomeRemoteDataSource
-import com.example.sportwisdom.features.home.sports.data.datasource.remote.HomeRemoteDataSourceImpl
+import com.example.sportwisdom.features.home.data.HomeRepository
+import com.example.sportwisdom.features.home.data.HomeRepositoryImpl
+import com.example.sportwisdom.features.home.data.datasource.remote.HomeRemoteDataSource
+import com.example.sportwisdom.features.home.data.datasource.remote.HomeRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
