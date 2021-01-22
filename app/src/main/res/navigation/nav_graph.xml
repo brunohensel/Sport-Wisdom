@@ -20,6 +20,7 @@
         android:name="com.example.sportwisdom.features.home.league.presentation.LeagueFragment"
         android:label="Leagues"
         tools:layout="@layout/fragment_league" >
+
         <argument
             android:name="sportDto"
             app:argType="com.example.sportwisdom.features.home.sports.domain.model.SportDto" />

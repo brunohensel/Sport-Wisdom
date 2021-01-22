@@ -15,13 +15,14 @@ import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_league.*
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
-import timber.log.Timber
 
 @FlowPreview
 @AndroidEntryPoint
@@ -40,9 +41,9 @@ class SportsFragment : Fragment(R.layout.fragment_home) {
         .state
         .map { homeState ->
           when (homeState.syncState) {
-            SportSyncState.Loading    -> progressBar.isVisible = true
-            SportSyncState.Content    -> displayAllSports(homeState.sportsModel.sports)
-            is SportSyncState.Message -> Timber.i("Current state: $homeState")
+            SportSyncState.Loading -> progressBar.isVisible = true
+            SportSyncState.Content -> displayAllSports(homeState.sportsModel.sports)
+            is SportSyncState.Message -> displayErrorMessage(homeState.syncState.msg)
           }
         }.launchIn(lifecycleScope)
     }
@@ -53,8 +54,13 @@ class SportsFragment : Fragment(R.layout.fragment_home) {
     homeAdapter.submitList(sports)
   }
 
+  private fun displayErrorMessage(msg: String?) {
+    progressBarLeagues.isVisible = false
+    Snackbar.make(requireView(), msg ?: "Unknown error", Snackbar.LENGTH_LONG).show()
+  }
+
   private fun onItemClicked(sportType: SportDto) {
-    val action = HomeFragmentDirections.actionHomeFragmentToLeagueFragment(sportType)
+    val action = SportsFragmentDirections.actionHomeFragmentToLeagueFragment(sportType)
     findNavController().navigate(action)
   }
 
