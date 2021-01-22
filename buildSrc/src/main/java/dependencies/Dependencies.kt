@@ -19,4 +19,8 @@ object Dependencies {
     const val room_ext = "androidx.room:room-ktx:${Versions.room_version}"
     const val timber = "com.jakewharton.timber:timber:${Versions.timber_version}"
     const val mockito_kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito_kotlin_version}"
+    const val navigation_fragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation_version}"
+    const val navigation_ktx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
+    const val coil = "io.coil-kt:coil:${Versions.coil_version}"
+    const val flexbox = "com.google.android:flexbox:${Versions.flexbox_version}"
 }

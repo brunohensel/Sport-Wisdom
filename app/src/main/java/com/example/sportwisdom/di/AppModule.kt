@@ -1,10 +1,10 @@
 package com.example.sportwisdom.di
 
 import com.example.sportwisdom.features.apiservice.SportApiService
-import com.example.sportwisdom.features.dashboard.data.DashboardRepository
-import com.example.sportwisdom.features.dashboard.data.DashboardRepositoryImpl
-import com.example.sportwisdom.features.dashboard.data.datasource.remote.DashboardRemoteDataSource
-import com.example.sportwisdom.features.dashboard.data.datasource.remote.DashboardRemoteDataSourceImpl
+import com.example.sportwisdom.features.home.sports.data.HomeRepository
+import com.example.sportwisdom.features.home.sports.data.HomeRepositoryImpl
+import com.example.sportwisdom.features.home.sports.data.datasource.remote.HomeRemoteDataSource
+import com.example.sportwisdom.features.home.sports.data.datasource.remote.HomeRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,9 +17,9 @@ object AppModule {
 
   @Singleton
   @Provides
-  fun provideDashboardRepository(remoteDataSource: DashboardRemoteDataSource): DashboardRepository = DashboardRepositoryImpl(remoteDataSource)
+  fun provideDashboardRepository(remoteDataSource: HomeRemoteDataSource): HomeRepository = HomeRepositoryImpl(remoteDataSource)
 
   @Singleton
   @Provides
-  fun provideDashboardRemoteDataSource(apiService: SportApiService): DashboardRemoteDataSource = DashboardRemoteDataSourceImpl(apiService)
+  fun provideDashboardRemoteDataSource(apiService: SportApiService): HomeRemoteDataSource = HomeRemoteDataSourceImpl(apiService)
 }

@@ -1,14 +1,12 @@
-package com.example.sportwisdom.features.dashboard.domain.model
+package com.example.sportwisdom.features.home.sports.domain.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class SportsModel(
-  val leagues: List<League>
-)
+data class LeagueModel(val leagues: List<LeagueDto>)
 
-data class League(
+data class LeagueDto(
   @Json(name = "idLeague") val id: String,
   @Json(name = "strLeague") val league: String,
   @Json(name = "strSport") val sportType: String

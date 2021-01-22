@@ -1,8 +1,9 @@
-package com.example.sportwisdom.features.dashboard.data.datasource.remote
+package com.example.sportwisdom.features.home.sports.data
 
 import com.example.sportwisdom.base.BaseAction
 import kotlinx.coroutines.flow.Flow
 
-interface DashboardRemoteDataSource {
+interface HomeRepository {
+  suspend fun fetchAllLeagues(): Flow<BaseAction>
   suspend fun fetchAllSports(): Flow<BaseAction>
 }

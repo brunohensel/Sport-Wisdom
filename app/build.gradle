@@ -9,6 +9,7 @@ plugins {
   id 'kotlin-kapt'
   id 'kotlin-android-extensions'
   id 'dagger.hilt.android.plugin'
+  id "androidx.navigation.safeargs.kotlin"
 }
 
 android {
@@ -77,6 +78,7 @@ dependencies {
   //Moshi
   implementation Dependencies.moshi_kotlin
   implementation Dependencies.moshi_std
+  implementation 'androidx.legacy:legacy-support-v4:1.0.0'
   kapt AnnotationProcessing.moshi_cogen
 
   //Dependency injection
@@ -87,6 +89,16 @@ dependencies {
 
   //Log
   implementation Dependencies.timber
+
+  //Navigation
+  implementation Dependencies.navigation_fragment
+  implementation Dependencies.navigation_ktx
+
+  //Image loader
+  implementation Dependencies.coil
+
+  //LayoutManager
+  implementation Dependencies.flexbox
 
   //Room
   implementation Dependencies.room

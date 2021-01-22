@@ -9,7 +9,9 @@ buildscript {
     classpath Build.build_tools
     classpath Build.kotlin_gradle_plugin
     classpath Build.dagger_hilt_plugin
+    classpath Build.navigation_plugin
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+
 
     // NOTE: Do not place your application dependencies here; they belong
     // in the individual module build.gradle files

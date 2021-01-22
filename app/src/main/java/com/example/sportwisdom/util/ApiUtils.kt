@@ -15,7 +15,7 @@ suspend fun <T> safeApiCall(
   return withContext(dispatcher) {
     try {
       // throws TimeoutCancellationException
-      withTimeout(6_000L) {
+      withTimeout(12_000L) {
         ApiResult.Success(apiCall.invoke())
       }
     } catch (throwable: Throwable) {
