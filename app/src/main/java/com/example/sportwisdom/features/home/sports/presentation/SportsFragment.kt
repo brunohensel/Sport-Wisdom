@@ -1,6 +1,5 @@
 package com.example.sportwisdom.features.home.sports.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -11,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.sportwisdom.R
 import com.example.sportwisdom.features.home.domain.HomeEvent
 import com.example.sportwisdom.features.home.sports.domain.model.SportDto
-import com.example.sportwisdom.features.home.sports.domain.state.HomeSyncState
+import com.example.sportwisdom.features.home.sports.domain.state.SportSyncState
 import com.google.android.flexbox.AlignItems
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -26,10 +25,10 @@ import timber.log.Timber
 
 @FlowPreview
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class SportsFragment : Fragment(R.layout.fragment_home) {
 
-  private val viewModel: HomeViewModel by viewModels()
-  private val homeAdapter by lazy { HomeAdapter(::onItemClicked) }
+  private val viewModel: SportsViewModel by viewModels()
+  private val homeAdapter by lazy { SportsAdapter(::onItemClicked) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -41,9 +40,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         .state
         .map { homeState ->
           when (homeState.syncState) {
-            HomeSyncState.Loading -> progressBar.isVisible = true
-            HomeSyncState.Content -> displayAllSports(homeState.sportsModel.sports)
-            is HomeSyncState.Message -> Timber.i("Current state: $homeState")
+            SportSyncState.Loading    -> progressBar.isVisible = true
+            SportSyncState.Content    -> displayAllSports(homeState.sportsModel.sports)
+            is SportSyncState.Message -> Timber.i("Current state: $homeState")
           }
         }.launchIn(lifecycleScope)
     }

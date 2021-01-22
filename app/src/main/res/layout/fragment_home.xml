@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.home.sports.presentation.HomeFragment">
+    tools:context=".features.home.sports.presentation.SportsFragment">
 
     <TextView
         android:id="@+id/homeTitle"

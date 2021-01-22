@@ -12,7 +12,7 @@ import com.example.sportwisdom.R
 import com.example.sportwisdom.features.home.sports.domain.model.SportDto
 import kotlinx.android.synthetic.main.item_home_sports.view.*
 
-class HomeAdapter(private val onItemClick: (SportDto) -> Unit) : ListAdapter<SportDto, HomeAdapter.HomeViewHolder>(HomeAdapter) {
+class SportsAdapter(private val onItemClick: (SportDto) -> Unit) : ListAdapter<SportDto, SportsAdapter.HomeViewHolder>(SportsAdapter) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
     return HomeViewHolder.from(parent)

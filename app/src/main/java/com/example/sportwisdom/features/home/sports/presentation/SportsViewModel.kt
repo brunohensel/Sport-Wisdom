@@ -7,16 +7,16 @@ import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
 import com.example.sportwisdom.features.home.domain.HomeActionCreator
 import com.example.sportwisdom.features.home.domain.HomeEvent
 import com.example.sportwisdom.features.home.sports.domain.reducer.SportsReducer
-import com.example.sportwisdom.features.home.sports.domain.state.HomeState
-import com.example.sportwisdom.features.home.sports.domain.state.HomeSyncState
+import com.example.sportwisdom.features.home.sports.domain.state.SportState
+import com.example.sportwisdom.features.home.sports.domain.state.SportSyncState
 import kotlinx.coroutines.FlowPreview
 
 @FlowPreview
-class HomeViewModel @ViewModelInject constructor(
+class SportsViewModel @ViewModelInject constructor(
   reducer: SportsReducer,
   actionCreator: HomeActionCreator
-): BaseStateViewModel<HomeState, HomeEvent, BaseAction>(
-  initialState = HomeState(sportsModel = SportsModel(emptyList()), syncState = HomeSyncState.Content),
+): BaseStateViewModel<SportState, HomeEvent, BaseAction>(
+  initialState = SportState(sportsModel = SportsModel(emptyList()), syncState = SportSyncState.Content),
   reducer = reducer,
   action = actionCreator
 )

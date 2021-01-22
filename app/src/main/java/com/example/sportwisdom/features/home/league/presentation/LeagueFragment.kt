@@ -8,7 +8,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.sportwisdom.R
 import com.example.sportwisdom.features.home.domain.HomeEvent
 import com.example.sportwisdom.features.home.league.domain.state.LeagueSyncState
-import com.example.sportwisdom.features.home.sports.presentation.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.asFlow

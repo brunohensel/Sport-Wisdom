@@ -2,8 +2,8 @@ package com.example.sportwisdom.features.home.sports.domain.reducer
 
 import com.example.sportwisdom.base.BaseAction
 import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
-import com.example.sportwisdom.features.home.sports.domain.state.HomeState
-import com.example.sportwisdom.features.home.sports.domain.state.HomeSyncState
+import com.example.sportwisdom.features.home.sports.domain.state.SportState
+import com.example.sportwisdom.features.home.sports.domain.state.SportSyncState
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
@@ -14,13 +14,13 @@ class SportsReducerTest {
     //Given
     val action = BaseAction.Executing
     val sports = SportsModel(emptyList())
-    val currentState = HomeState(sportsModel = sports, syncState = HomeSyncState.Content)
+    val currentState = SportState(sportsModel = sports, syncState = SportSyncState.Content)
 
     //When
     val newState = SportsReducer().invoke(currentState, action)
 
     //Then
-    assertThat(newState.syncState).isEqualTo(HomeSyncState.Loading)
+    assertThat(newState.syncState).isEqualTo(SportSyncState.Loading)
   }
 
   @Test
@@ -28,13 +28,13 @@ class SportsReducerTest {
     //Given
     val sports = SportsModel(emptyList())
     val action = BaseAction.Success(sports)
-    val currentState = HomeState(sports, HomeSyncState.Loading)
+    val currentState = SportState(sports, SportSyncState.Loading)
 
     //When
     val newState = SportsReducer().invoke(currentState, action)
 
     //Then
-    assertThat(newState.syncState).isEqualTo(HomeSyncState.Content)
+    assertThat(newState.syncState).isEqualTo(SportSyncState.Content)
     assertThat(newState.sportsModel.sports).isEqualTo(sports.sports)
   }
 }
