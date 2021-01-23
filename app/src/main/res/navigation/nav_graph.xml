@@ -24,5 +24,17 @@
         <argument
             android:name="sportDto"
             app:argType="com.example.sportwisdom.features.home.sports.domain.model.SportDto" />
+        <action
+            android:id="@+id/action_leagueFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.sportwisdom.features.home.events.presentation.EventsFragment"
+        android:label="Events"
+        tools:layout="@layout/fragment_events" >
+        <argument
+            android:name="leagueId"
+            app:argType="integer" />
     </fragment>
 </navigation>

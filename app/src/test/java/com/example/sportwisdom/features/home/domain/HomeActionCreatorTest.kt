@@ -3,6 +3,7 @@ package com.example.sportwisdom.features.home.domain
 import com.example.sportwisdom.CoroutineTestRule
 import com.example.sportwisdom.base.BaseAction
 import com.example.sportwisdom.features.home.data.HomeRepository
+import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.home.league.domain.model.LeagueDto
 import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
 import com.google.common.truth.Truth.assertThat
@@ -32,7 +33,7 @@ class HomeActionCreatorTest {
   private val actionCreator = HomeActionCreator(repository)
 
   @Test
-  fun fetchLeagues_returnMapOf_whenSuccess() = runBlockingTest {
+  fun fetchLeagues_returnListOfLeagueDto_whenSuccess() = runBlockingTest {
     //Given
     val sportType = "Soccer"
     val event = HomeEvent.FetchLeagues(sportType)
@@ -90,6 +91,39 @@ class HomeActionCreatorTest {
     //Given
     val event = HomeEvent.FetchSports
     whenever(repository.fetchAllSports()).thenReturn(flowOf(BaseAction.Failed(null, "Unknown network error")))
+
+    //When
+    val result = actionCreator.invoke(event)
+
+    //Then
+    assertThat(result.count()).isEqualTo(2)
+    assertThat(result.take(1).toList()).contains(BaseAction.Executing)
+    Assert.assertTrue(result.take(2).toList().contains(BaseAction.Failed(null, "Unknown network error")))
+  }
+
+  @Test
+  fun fetchEvents_returnListOfEvents_whenSuccess() = runBlockingTest {
+    //Given
+    val leagueId = 4328
+    val event = HomeEvent.FetchEvents(leagueId)
+    val response = listOf<EventDto>()
+    repository.fetchEvents(leagueId) willReturn flowOf(BaseAction.Success(response))
+
+    //When
+    val result = actionCreator.invoke(event)
+
+    //Then
+    assertThat(result.count()).isEqualTo(2)
+    assertThat(result.take(1).toList()).contains(BaseAction.Executing)
+    assertThat(result.take(2).toList()).contains(BaseAction.Success(response))
+  }
+
+  @Test
+  fun fetchEvents_returnFailed_whenError() = runBlockingTest {
+    //Given
+    val leagueId = 4328
+    val event = HomeEvent.FetchEvents(leagueId)
+    whenever(repository.fetchEvents(leagueId)).thenReturn(flowOf(BaseAction.Failed(null, "Unknown network error")))
 
     //When
     val result = actionCreator.invoke(event)

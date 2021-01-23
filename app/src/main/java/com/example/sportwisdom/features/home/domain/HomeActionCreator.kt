@@ -17,6 +17,7 @@ class HomeActionCreator @Inject constructor(private val repository: HomeReposito
     return flow {
       val result = when (event) {
         is HomeEvent.FetchLeagues -> repository.fetchAllLeagues(event.sportType)
+        is HomeEvent.FetchEvents  -> repository.fetchEvents(event.leagueId)
         HomeEvent.FetchSports  -> repository.fetchAllSports()
       }
       emit(result)
