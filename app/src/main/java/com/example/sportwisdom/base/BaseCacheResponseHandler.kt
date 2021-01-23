@@ -9,5 +9,5 @@ abstract class BaseCacheResponseHandler<Data>(private val cacheResult: CacheResu
     }
   }
 
-  abstract suspend fun handleSuccess(resultObj: Data): BaseAction.RemoteSuccess<Data>
+  abstract suspend fun handleSuccess(resultObj: Data): BaseAction.CacheSuccess<Data>
 }

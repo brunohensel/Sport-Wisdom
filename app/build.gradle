@@ -106,7 +106,7 @@ dependencies {
 
   //Room
   implementation Dependencies.room
-  implementation Dependencies.room_ext
+  implementation Dependencies.room_ktx
   kapt AnnotationProcessing.room_compiler
 
   //Unit tests
