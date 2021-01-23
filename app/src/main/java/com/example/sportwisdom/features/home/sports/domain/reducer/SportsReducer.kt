@@ -10,12 +10,12 @@ import javax.inject.Inject
 class SportsReducer @Inject constructor() : Reducer<SportState, BaseAction> {
 
   override fun invoke(currentState: SportState, action: BaseAction): SportState {
-    return when (action){
-      BaseAction.Executing     -> currentState.copy(syncState = SportSyncState.Loading)
+    return when (action) {
+      BaseAction.Executing           -> currentState.copy(syncState = SportSyncState.Loading)
       BaseAction.EmptyResult         -> currentState.copy(syncState = SportSyncState.Empty)
       is BaseAction.RemoteSuccess<*> -> currentState.copy(sportsModel = action.value as SportsModel, syncState = SportSyncState.Content)
       is BaseAction.Failed           -> currentState.copy(syncState = SportSyncState.Message(action.reason))
-      else -> throw IllegalStateException("Wrong Action: $action for this Reducer: ${javaClass.simpleName}")
+      else                           -> throw IllegalStateException("Wrong Action: $action for this Reducer: ${javaClass.simpleName}")
     }
   }
 }

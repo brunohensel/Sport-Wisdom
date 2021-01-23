@@ -11,7 +11,7 @@ import javax.inject.Inject
 class EventsReducer @Inject constructor() : Reducer<EventsState, BaseAction> {
   override fun invoke(currentState: EventsState, action: BaseAction): EventsState {
     return when (action) {
-      BaseAction.Executing -> currentState.copy(syncState = EventSyncState.Loading)
+      BaseAction.Executing           -> currentState.copy(syncState = EventSyncState.Loading)
       BaseAction.EmptyResult         -> currentState.copy(syncState = EventSyncState.Empty)
       is BaseAction.RemoteSuccess<*> -> currentState.copy(eventsModel = action.value as List<EventDto>, syncState = EventSyncState.Content)
       is BaseAction.Failed           -> currentState.copy(syncState = EventSyncState.Message(action.reason))
