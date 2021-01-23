@@ -66,4 +66,9 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
     super.onViewCreated(view, savedInstanceState)
     rvEvents.adapter = eventsAdapter
   }
+
+  companion object{
+    const val SCHEDULE_EXTRA_EVENT = "event_name_extra"
+    const val SCHEDULE_EXTRA_EVENT_ID = "event_id_extra"
+  }
 }

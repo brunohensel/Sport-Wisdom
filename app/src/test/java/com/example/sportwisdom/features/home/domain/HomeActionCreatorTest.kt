@@ -42,7 +42,7 @@ class HomeActionCreatorTest {
       add(LeagueDto("2", "B","Baseball"))
     }
     val response = leagues.filter { it.sportType == sportType }
-    repository.fetchAllLeagues(sportType) willReturn flowOf(BaseAction.Success(response))
+    repository.fetchAllLeagues(sportType) willReturn flowOf(BaseAction.RemoteSuccess(response))
 
     //When
     val result = actionCreator.invoke(event)
@@ -51,7 +51,7 @@ class HomeActionCreatorTest {
     assertThat(result.count()).isEqualTo(2)
     assertThat(response.first().sportType).isEqualTo(sportType)
     assertThat(result.take(1).toList()).contains(BaseAction.Executing)
-    assertThat(result.take(2).toList()).contains(BaseAction.Success(response))
+    assertThat(result.take(2).toList()).contains(BaseAction.RemoteSuccess(response))
   }
 
   @Test
@@ -75,7 +75,7 @@ class HomeActionCreatorTest {
     //Given
     val event = HomeEvent.FetchSports
     val response = SportsModel(emptyList())
-    repository.fetchAllSports() willReturn flowOf(BaseAction.Success(response))
+    repository.fetchAllSports() willReturn flowOf(BaseAction.RemoteSuccess(response))
 
     //When
     val result = actionCreator.invoke(event)
@@ -83,7 +83,7 @@ class HomeActionCreatorTest {
     //Then
     assertThat(result.count()).isEqualTo(2)
     assertThat(result.take(1).toList()).contains(BaseAction.Executing)
-    assertThat(result.take(2).toList()).contains(BaseAction.Success(response))
+    assertThat(result.take(2).toList()).contains(BaseAction.RemoteSuccess(response))
   }
 
   @Test
@@ -107,7 +107,7 @@ class HomeActionCreatorTest {
     val leagueId = 4328
     val event = HomeEvent.FetchEvents(leagueId)
     val response = listOf<EventDto>()
-    repository.fetchEvents(leagueId) willReturn flowOf(BaseAction.Success(response))
+    repository.fetchEvents(leagueId) willReturn flowOf(BaseAction.RemoteSuccess(response))
 
     //When
     val result = actionCreator.invoke(event)
@@ -115,7 +115,7 @@ class HomeActionCreatorTest {
     //Then
     assertThat(result.count()).isEqualTo(2)
     assertThat(result.take(1).toList()).contains(BaseAction.Executing)
-    assertThat(result.take(2).toList()).contains(BaseAction.Success(response))
+    assertThat(result.take(2).toList()).contains(BaseAction.RemoteSuccess(response))
   }
 
   @Test

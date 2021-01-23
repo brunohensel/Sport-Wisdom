@@ -23,4 +23,5 @@ object Dependencies {
     const val navigation_ktx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation_version}"
     const val coil = "io.coil-kt:coil:${Versions.coil_version}"
     const val flexbox = "com.google.android:flexbox:${Versions.flexbox_version}"
+    const val workerManager = "androidx.work:work-runtime-ktx:${Versions.workManager_version}"
 }

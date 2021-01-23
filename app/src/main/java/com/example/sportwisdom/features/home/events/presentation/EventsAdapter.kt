@@ -10,6 +10,8 @@ import coil.load
 import com.example.sportwisdom.R
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.home.events.presentation.EventsAdapter.EventsViewHolder
+import com.example.sportwisdom.util.formatTo
+import com.example.sportwisdom.util.toDate
 import kotlinx.android.synthetic.main.item_events.view.*
 
 class EventsAdapter : ListAdapter<EventDto, EventsViewHolder>(EventsAdapter) {
@@ -28,8 +30,8 @@ class EventsAdapter : ListAdapter<EventDto, EventsViewHolder>(EventsAdapter) {
       with(itemView) {
         txtEvent.text = data.strEvent
         txtVenue.text = if (data.strVenue.isNullOrBlank()) "Unavailable venue" else data.strVenue
-        txtTime.text = if (data.strTime == "00:00:00") "Time not Known" else data.strTime
-        txtTimeStamp.text = data.dateEvent
+        txtTime.text = data.strTimestamp?.toDate()?.formatTo("HH:mm") ?: if (data.strTime == "00:00:00") "Time not Known" else data.strTime
+        txtDate.text = data.dateEvent
 
         imgAddToScheduler.setOnClickListener { }
 

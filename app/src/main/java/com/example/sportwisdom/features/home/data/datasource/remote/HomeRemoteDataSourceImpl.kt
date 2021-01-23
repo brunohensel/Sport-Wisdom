@@ -17,8 +17,8 @@ class HomeRemoteDataSourceImpl @Inject constructor(private val sportApiService: 
   override suspend fun fetchAllLeagues(sportType: String): Flow<BaseAction> = flow {
     val networkResult = safeApiCall(IO) { sportApiService.fetchAllLeagues().leagues }
     val response = object : BaseApiResponseHandler<List<LeagueDto>>(apiResult = networkResult) {
-      override suspend fun handleSuccess(resultObj: List<LeagueDto>): BaseAction.Success<List<LeagueDto>> {
-        return BaseAction.Success(resultObj.filter { it.sportType == sportType })
+      override suspend fun handleSuccess(resultObj: List<LeagueDto>): BaseAction.RemoteSuccess<List<LeagueDto>> {
+        return BaseAction.RemoteSuccess(resultObj.filter { it.sportType == sportType })
       }
     }.getResult()
     emit(response)
@@ -27,8 +27,8 @@ class HomeRemoteDataSourceImpl @Inject constructor(private val sportApiService: 
   override suspend fun fetchAllSports(): Flow<BaseAction> = flow {
     val networkResult = safeApiCall(IO){sportApiService.fetchAllSports()}
     val response = object : BaseApiResponseHandler<SportsModel>(networkResult){
-      override suspend fun handleSuccess(resultObj: SportsModel): BaseAction.Success<SportsModel> {
-        return BaseAction.Success(resultObj)
+      override suspend fun handleSuccess(resultObj: SportsModel): BaseAction.RemoteSuccess<SportsModel> {
+        return BaseAction.RemoteSuccess(resultObj)
       }
     }.getResult()
     emit(response)
@@ -37,8 +37,8 @@ class HomeRemoteDataSourceImpl @Inject constructor(private val sportApiService: 
   override suspend fun fetchEvents(leagueId: Int): Flow<BaseAction> = flow{
     val networkResult = safeApiCall(IO){sportApiService.fetchEvents(leagueId).events}
     val response = object : BaseApiResponseHandler<List<EventDto>?>(apiResult = networkResult){
-      override suspend fun handleSuccess(resultObj: List<EventDto>?): BaseAction.Success<List<EventDto>?> {
-        return BaseAction.Success(resultObj)
+      override suspend fun handleSuccess(resultObj: List<EventDto>?): BaseAction.RemoteSuccess<List<EventDto>?> {
+        return BaseAction.RemoteSuccess(resultObj)
       }
     }.getResult()
     emit(response)

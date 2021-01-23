@@ -27,11 +27,8 @@ abstract class BaseStateViewModel<State, Event, Action>(
 
   private fun toState(): StateFlow<State> {
     return event
-      .onEach { Timber.d("Event $it") }
       .flatMapConcat { event -> action(event) }
-      .onEach { Timber.i("Action $it") }
       .map { action -> reducer(state.value, action) }
-      .onEach { Timber.w("State $it") }
       .onCompletion { Timber.d("onCompletion for $state") }
       .stateIn(viewModelScope, SharingStarted.Eagerly, initialState)
   }

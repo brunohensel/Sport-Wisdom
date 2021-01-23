@@ -6,5 +6,6 @@
     <string name="event_title">Event:</string>
     <string name="venue_title">Venue:</string>
     <string name="date_title">Date:</string>
+    <string name="event_notification_title">A event is about to start</string>
     <string name="no_event_was_found">No event was found</string>
 </resources>

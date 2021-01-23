@@ -27,7 +27,7 @@ class LeagueReducerTest {
   fun content_test() {
     //Given
     val leagues = emptyList<LeagueDto>()
-    val action = BaseAction.Success(leagues)
+    val action = BaseAction.RemoteSuccess(leagues)
     val currentState = LeagueState(leagues, LeagueSyncState.Loading)
 
     //When

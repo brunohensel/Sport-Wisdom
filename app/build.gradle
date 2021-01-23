@@ -101,6 +101,9 @@ dependencies {
   //LayoutManager
   implementation Dependencies.flexbox
 
+  //WorkManager
+  implementation Dependencies.workerManager
+
   //Room
   implementation Dependencies.room
   implementation Dependencies.room_ext
@@ -114,4 +117,5 @@ dependencies {
   testImplementation TestDependencies.truth_testing
   androidTestImplementation AndroidTestDependencies.junit_ext
   androidTestImplementation AndroidTestDependencies.espresso_core
+  androidTestImplementation AndroidTestDependencies.workManager
 }

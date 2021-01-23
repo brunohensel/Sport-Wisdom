@@ -12,5 +12,5 @@ abstract class BaseApiResponseHandler<Data>(private val apiResult: ApiResult<Dat
     }
   }
 
-  abstract suspend fun handleSuccess(resultObj: Data): BaseAction.Success<Data>
+  abstract suspend fun handleSuccess(resultObj: Data): BaseAction.RemoteSuccess<Data>
 }

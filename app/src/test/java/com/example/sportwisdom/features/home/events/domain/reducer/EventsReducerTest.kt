@@ -26,7 +26,7 @@ class EventsReducerTest {
   fun content_test() {
     //Given
     val events = emptyList<EventDto>()
-    val action = BaseAction.Success(events)
+    val action = BaseAction.RemoteSuccess(events)
     val currentState = EventsState(events, EventSyncState.Loading)
 
     //When
