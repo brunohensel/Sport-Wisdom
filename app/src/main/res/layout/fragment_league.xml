@@ -6,27 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".features.home.league.presentation.LeagueFragment">
 
-    <TextView
-        android:id="@+id/leagueTitle"
-        style="@style/TextAppearance.MaterialComponents.Headline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/leagues"
-        android:layout_marginTop="@dimen/margin_8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLeagues"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="@dimen/margin_8"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/leagueTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
         android:id="@+id/progressBarLeagues"
@@ -34,6 +23,19 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtEmptyLeagueState"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_event_was_found"
+        android:textSize="@dimen/text_16"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/rvLeagues"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

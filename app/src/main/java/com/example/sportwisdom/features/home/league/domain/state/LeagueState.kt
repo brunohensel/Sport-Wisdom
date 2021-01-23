@@ -9,6 +9,7 @@ data class LeagueState(
 
 sealed class LeagueSyncState {
   object Loading : LeagueSyncState()
+  object Empty : LeagueSyncState()
   object Content : LeagueSyncState()
   data class Message(val msg: String?) : LeagueSyncState()
 }

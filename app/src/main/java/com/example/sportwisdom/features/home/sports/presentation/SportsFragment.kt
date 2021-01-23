@@ -43,10 +43,16 @@ class SportsFragment : Fragment(R.layout.fragment_home) {
           when (homeState.syncState) {
             SportSyncState.Loading -> progressBar.isVisible = true
             SportSyncState.Content -> displayAllSports(homeState.sportsModel.sports)
+            SportSyncState.Empty   -> handleEmptyState()
             is SportSyncState.Message -> displayErrorMessage(homeState.syncState.msg)
           }
         }.launchIn(lifecycleScope)
     }
+  }
+
+  private fun handleEmptyState() {
+    txtEmptySportState.isVisible = true
+    progressBar.isVisible = false
   }
 
   private fun displayAllSports(sports: List<SportDto>) {

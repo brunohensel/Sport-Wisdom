@@ -9,6 +9,7 @@ data class SportState(
 
 sealed class SportSyncState {
   object Loading : SportSyncState()
+  object Empty : SportSyncState()
   object Content : SportSyncState()
   data class Message(val msg: String?) : SportSyncState()
 }

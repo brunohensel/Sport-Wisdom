@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Sport Wisdom</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sports_home_title">SPORTS</string>
     <string name="leagues">Leagues</string>
+    <string name="event_title">Event:</string>
+    <string name="venue_title">Venue:</string>
+    <string name="date_title">Date:</string>
+    <string name="no_event_was_found">No event was found</string>
 </resources>

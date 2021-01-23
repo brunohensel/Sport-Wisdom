@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/margin_8">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_8"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imgThumbEvent"
+                android:layout_width="wrap_content"
+                android:layout_height="130dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/dafault_image" />
+
+            <TextView
+                android:id="@+id/txtEventTitle"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/event_title"
+                android:textSize="@dimen/text_16"
+                android:layout_marginTop="@dimen/margin_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgThumbEvent" />
+
+            <TextView
+                android:id="@+id/txtEvent"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintEnd_toEndOf="@+id/txtVenue"
+                app:layout_constraintStart_toStartOf="@+id/txtVenue"
+                app:layout_constraintTop_toTopOf="@+id/txtEventTitle"
+                tools:text="sakjbasbcjks" />
+
+            <TextView
+                android:id="@+id/txtVenueTitle"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="@string/venue_title"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtEventTitle" />
+
+            <TextView
+                android:id="@+id/txtVenue"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintBottom_toBottomOf="@+id/txtVenueTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtVenueTitle"
+                app:layout_constraintTop_toTopOf="@+id/txtVenueTitle"
+                tools:text="djnsjns" />
+
+            <TextView
+                android:id="@+id/txtDateTitle"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="@string/date_title"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtVenueTitle" />
+
+            <TextView
+                android:id="@+id/txtTimeStamp"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintBottom_toBottomOf="@+id/txtDateTitle"
+                app:layout_constraintStart_toStartOf="@+id/txtVenue"
+                app:layout_constraintTop_toTopOf="@+id/txtDateTitle"
+                tools:text="djnsjns" />
+
+
+            <TextView
+                android:id="@+id/txtTime"
+                style="@style/TextAppearance.MaterialComponents.Headline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8"
+                android:textSize="@dimen/text_16"
+                app:layout_constraintBottom_toBottomOf="@+id/txtDateTitle"
+                app:layout_constraintStart_toEndOf="@+id/txtTimeStamp"
+                app:layout_constraintTop_toTopOf="@+id/txtDateTitle"
+                tools:text="djnsjns" />
+
+
+            <ImageView
+                android:id="@+id/imgAddToScheduler"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/margin_16"
+                android:src="@drawable/ic_schedule"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtVenue" />
+<!--
+            <TextView
+                android:id="@+id/txtAddToScheduler"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Add to your\nschedule"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/imgAddToScheduler"
+                app:layout_constraintStart_toStartOf="@+id/imgAddToScheduler"
+                app:layout_constraintTop_toBottomOf="@+id/imgAddToScheduler" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
