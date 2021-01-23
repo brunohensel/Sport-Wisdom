@@ -16,6 +16,11 @@ android {
   compileSdkVersion Versions.compileSdk
   buildToolsVersion "30.0.2"
 
+  packagingOptions {
+    exclude 'META-INF/AL2.0'
+    exclude 'META-INF/LGPL2.1'
+  }
+
   defaultConfig {
     applicationId App.id
     minSdkVersion Versions.minSdk
@@ -118,4 +123,7 @@ dependencies {
   androidTestImplementation AndroidTestDependencies.junit_ext
   androidTestImplementation AndroidTestDependencies.espresso_core
   androidTestImplementation AndroidTestDependencies.workManager
+  androidTestImplementation AndroidTestDependencies.arch_test
+  androidTestImplementation AndroidTestDependencies.coroutine_android_test
+  androidTestImplementation AndroidTestDependencies.room_android_test
 }

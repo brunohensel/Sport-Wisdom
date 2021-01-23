@@ -15,7 +15,7 @@ interface SportWisdomDao {
   suspend fun insertEvent(eventDto: EventDto): Long
 
   @Query("SELECT * from events_table")
-  suspend fun getEvents(): Flow<List<EventDto>>
+  fun getEvents(): Flow<List<EventDto>>
 
   @Query("DELETE from events_table WHERE idEvent = :id")
   suspend fun deleteEventById(id: String): Int

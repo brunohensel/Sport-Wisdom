@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 
-@Database(entities = [EventDto::class], version = 1)
+@Database(entities = [EventDto::class], version = 1, exportSchema = false)
 abstract class SportWisdomDatabase : RoomDatabase(){
 
   abstract fun sportWisdomDao(): SportWisdomDao
