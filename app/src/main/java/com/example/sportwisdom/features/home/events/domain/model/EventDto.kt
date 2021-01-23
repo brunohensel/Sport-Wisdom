@@ -1,6 +1,11 @@
 package com.example.sportwisdom.features.home.events.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "events_table")
 data class EventDto(
+  @PrimaryKey(autoGenerate = false)
   val idEvent: String,
   val idLeague: String,
   val strEvent: String,
