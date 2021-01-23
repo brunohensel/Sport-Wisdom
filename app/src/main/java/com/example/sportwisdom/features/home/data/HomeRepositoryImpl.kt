@@ -14,4 +14,8 @@ class HomeRepositoryImpl @Inject constructor(private val remoteDataSource: HomeR
   override suspend fun fetchAllSports(): Flow<BaseAction> {
     return remoteDataSource.fetchAllSports()
   }
+
+  override suspend fun fetchEvents(leagueId: Int): Flow<BaseAction> {
+    return remoteDataSource.fetchEvents(leagueId)
+  }
 }
