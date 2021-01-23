@@ -15,7 +15,7 @@ class EventsReducer @Inject constructor() : Reducer<EventsState, BaseAction> {
       BaseAction.EmptyResult         -> currentState.copy(syncState = EventSyncState.Empty)
       is BaseAction.RemoteSuccess<*> -> currentState.copy(eventsModel = action.value as List<EventDto>, syncState = EventSyncState.Content)
       is BaseAction.Failed           -> currentState.copy(syncState = EventSyncState.Message(action.reason))
-      is BaseAction.CacheSuccess<*> -> TODO()
+      is BaseAction.CacheSuccess<*>  -> TODO()
     }
   }
 }
