@@ -87,6 +87,21 @@ class SportWisdomDaoTest {
     assertTrue(result.none { it.idEvent == "1" })
   }
 
+  @Test
+  fun deleteAllEvents() = runBlockingTest {
+    //Given
+    mockedEvents().toList().forEach { dao.insertEvent(it) }
+    assertEquals(dao.getEvents().first().size, 2)
+
+
+    //When
+    dao.deleteAllEvents()
+    val result = dao.getEvents().first()
+
+    //Then
+    assertTrue(result.none())
+  }
+
   private fun mockedEvents() = arrayListOf<EventDto>().apply {
     add(
         EventDto(

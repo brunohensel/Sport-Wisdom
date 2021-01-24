@@ -19,4 +19,7 @@ interface SportWisdomDao {
 
   @Query("DELETE from events_table WHERE idEvent = :id")
   suspend fun deleteEventById(id: String): Int
+
+  @Query("DELETE from events_table ")
+  suspend fun deleteAllEvents()
 }
