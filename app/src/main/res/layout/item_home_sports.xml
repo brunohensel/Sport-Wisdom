@@ -25,9 +25,9 @@
         android:padding="@dimen/padding_4"
         android:layout_marginBottom="@dimen/margin_8"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imgHomeSport"
-        app:layout_constraintStart_toStartOf="@+id/imgHomeSport"
-        app:layout_constraintTop_toBottomOf="@+id/imgHomeSport"
+        app:layout_constraintEnd_toEndOf="@id/imgHomeSport"
+        app:layout_constraintStart_toStartOf="@id/imgHomeSport"
+        app:layout_constraintTop_toBottomOf="@id/imgHomeSport"
         tools:text="fkjnsdfdksj" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,7 +39,7 @@
                 android:textSize="@dimen/text_16"
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgThumbEvent" />
+                app:layout_constraintTop_toBottomOf="@id/imgThumbEvent" />
 
             <TextView
                 android:id="@+id/txtEvent"
@@ -47,9 +47,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintEnd_toEndOf="@+id/txtVenue"
-                app:layout_constraintStart_toStartOf="@+id/txtVenue"
-                app:layout_constraintTop_toTopOf="@+id/txtEventTitle"
+                app:layout_constraintEnd_toEndOf="@id/txtVenue"
+                app:layout_constraintStart_toStartOf="@id/txtVenue"
+                app:layout_constraintTop_toTopOf="@id/txtEventTitle"
                 tools:text="sakjbasbcjks" />
 
             <TextView
@@ -60,8 +60,8 @@
                 android:layout_marginTop="@dimen/margin_8"
                 android:text="@string/venue_title"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintStart_toStartOf="@+id/txtEventTitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtEventTitle" />
+                app:layout_constraintStart_toStartOf="@id/txtEventTitle"
+                app:layout_constraintTop_toBottomOf="@id/txtEventTitle" />
 
             <TextView
                 android:id="@+id/txtVenue"
@@ -71,10 +71,10 @@
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintBottom_toBottomOf="@+id/txtVenueTitle"
+                app:layout_constraintBottom_toBottomOf="@id/txtVenueTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txtVenueTitle"
-                app:layout_constraintTop_toTopOf="@+id/txtVenueTitle"
+                app:layout_constraintStart_toEndOf="@id/txtVenueTitle"
+                app:layout_constraintTop_toTopOf="@id/txtVenueTitle"
                 tools:text="djnsjns" />
 
             <TextView
@@ -85,8 +85,8 @@
                 android:layout_marginTop="@dimen/margin_8"
                 android:text="@string/date_title"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintStart_toStartOf="@+id/txtVenueTitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtVenueTitle" />
+                app:layout_constraintStart_toStartOf="@id/txtVenueTitle"
+                app:layout_constraintTop_toBottomOf="@id/txtVenueTitle" />
 
             <TextView
                 android:id="@+id/txtDate"
@@ -94,9 +94,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintBottom_toBottomOf="@+id/txtDateTitle"
-                app:layout_constraintStart_toStartOf="@+id/txtVenue"
-                app:layout_constraintTop_toTopOf="@+id/txtDateTitle"
+                app:layout_constraintBottom_toBottomOf="@id/txtDateTitle"
+                app:layout_constraintStart_toStartOf="@id/txtVenue"
+                app:layout_constraintTop_toTopOf="@id/txtDateTitle"
                 tools:text="djnsjns" />
 
 
@@ -107,9 +107,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintBottom_toBottomOf="@+id/txtDateTitle"
-                app:layout_constraintStart_toEndOf="@+id/txtDate"
-                app:layout_constraintTop_toTopOf="@+id/txtDateTitle"
+                app:layout_constraintBottom_toBottomOf="@id/txtDateTitle"
+                app:layout_constraintStart_toEndOf="@id/txtDate"
+                app:layout_constraintTop_toTopOf="@id/txtDateTitle"
                 tools:text="djnsjns" />
 
 
@@ -123,7 +123,7 @@
                 android:src="@drawable/ic_schedule"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtVenue" />
+                app:layout_constraintTop_toBottomOf="@id/txtVenue" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
