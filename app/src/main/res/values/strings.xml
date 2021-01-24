@@ -8,4 +8,8 @@
     <string name="date_title">Date:</string>
     <string name="event_notification_title">Your event is about to start</string>
     <string name="no_event_was_found">No event was found</string>
+    <string name="home_menu_title">Home</string>
+    <string name="search_menu_title">Search</string>
+    <string name="favorite_menu_title">Favorite</string>
+    <string name="schedules_menu_title">Schedules</string>
 </resources>
