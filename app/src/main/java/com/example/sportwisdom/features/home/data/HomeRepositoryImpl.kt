@@ -12,19 +12,19 @@ class HomeRepositoryImpl @Inject constructor(
   private val localDataSource: HomeLocalDataSource
 ) : HomeRepository {
 
-  override suspend fun fetchAllLeagues(sportType: String): Flow<BaseAction> {
+  override suspend fun fetchAllLeagues(sportType: String):Flow<BaseAction<*>> {
     return remoteDataSource.fetchAllLeagues(sportType)
   }
 
-  override suspend fun fetchAllSports(): Flow<BaseAction> {
+  override suspend fun fetchAllSports(): Flow<BaseAction<*>> {
     return remoteDataSource.fetchAllSports()
   }
 
-  override suspend fun fetchEvents(leagueId: Int): Flow<BaseAction> {
+  override suspend fun fetchEvents(leagueId: Int): Flow<BaseAction<*>> {
     return remoteDataSource.fetchEvents(leagueId)
   }
 
-  override suspend fun insertEvent(eventDto: EventDto): Flow<BaseAction> {
+  override suspend fun insertEvent(eventDto: EventDto): Flow<BaseAction<*>> {
     return localDataSource.insertEvent(eventDto)
   }
 }

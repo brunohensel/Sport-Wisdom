@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @FlowPreview
-class ScheduleActionCreator @Inject constructor(private val repository: ScheduleRepository) : Action<ScheduleIntents, BaseAction> {
-  override fun invoke(intents: ScheduleIntents): Flow<BaseAction> {
+class ScheduleActionCreator @Inject constructor(private val repository: ScheduleRepository) : Action<ScheduleIntents, BaseAction<*>> {
+  override fun invoke(intents: ScheduleIntents): Flow<BaseAction<*>> {
     return flow {
       val result = when (intents) {
         ScheduleIntents.FetchCachedEvents -> repository.fetchCachedEvents()

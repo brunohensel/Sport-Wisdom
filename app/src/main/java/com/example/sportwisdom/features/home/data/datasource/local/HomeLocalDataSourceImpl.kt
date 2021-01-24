@@ -30,9 +30,9 @@ class HomeLocalDataSourceImpl @Inject constructor(private val dao: SportWisdomDa
   private val workManager = WorkManager.getInstance(context.applicationContext)
 
   @FlowPreview
-  override suspend fun insertEvent(eventDto: EventDto): Flow<BaseAction> = flow {
+  override suspend fun insertEvent(eventDto: EventDto): Flow<BaseAction<*>> = flow {
     val cacheResult = safeCacheCall(IO) { dao.insertEvent(eventDto) }
-    val cacheResponse = object : BaseCacheResponseHandler<Long>(cacheResult) {
+    val cacheResponse = object : BaseCacheResponseHandler<Any, Long>(cacheResult) {
       override suspend fun handleSuccess(resultObj: Long): BaseAction.CacheSuccess<Long> {
         return BaseAction.CacheSuccess(resultObj)
       }

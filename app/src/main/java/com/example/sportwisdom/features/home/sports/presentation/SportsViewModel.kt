@@ -15,7 +15,7 @@ import kotlinx.coroutines.FlowPreview
 class SportsViewModel @ViewModelInject constructor(
   reducer: SportsReducer,
   actionCreator: HomeActionCreator
-): BaseStateViewModel<SportState, HomeIntents, BaseAction>(
+): BaseStateViewModel<SportState, HomeIntents, BaseAction<*>>(
   initialState = SportState(sportsModel = SportsModel(emptyList()), syncState = SportSyncState.Content),
   reducer = reducer,
   action = actionCreator

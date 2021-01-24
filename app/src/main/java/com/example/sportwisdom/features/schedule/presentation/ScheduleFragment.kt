@@ -38,6 +38,7 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
             ScheduleSyncState.Loading -> progressBarCachedEvents.isVisible = true
             ScheduleSyncState.Content -> displayEvents(scheduleState.scheduleModel)
             ScheduleSyncState.Empty -> handleEmptyState()
+            ScheduleSyncState.SideEffect -> progressBarCachedEvents.isVisible = false
             is ScheduleSyncState.Message -> displayErrorMessage(scheduleState.syncState.msg)
           }
         }.launchIn(lifecycleScope)
@@ -56,7 +57,6 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
         txtEmptyCachedEventsState.isVisible = cachedEvents.isEmpty()
         if (cachedEvents.isNotEmpty()) scheduleAdapter.submitList(cachedEvents)
       }
-      Timber.i("Flow of: ${eventsModel.first()}")
     }
   }
 

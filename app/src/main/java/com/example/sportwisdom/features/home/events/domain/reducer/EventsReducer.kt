@@ -8,14 +8,15 @@ import com.example.sportwisdom.features.home.events.domain.state.EventsState
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
-class EventsReducer @Inject constructor() : Reducer<EventsState, BaseAction> {
-  override fun invoke(currentState: EventsState, action: BaseAction): EventsState {
+class EventsReducer @Inject constructor() : Reducer<EventsState, BaseAction<*>> {
+  override fun invoke(currentState: EventsState, action: BaseAction<*>): EventsState {
     return when (action) {
       BaseAction.Executing           -> currentState.copy(syncState = EventSyncState.Loading)
       BaseAction.EmptyResult         -> currentState.copy(syncState = EventSyncState.Empty)
       is BaseAction.RemoteSuccess<*> -> currentState.copy(eventsModel = action.value as List<EventDto>, syncState = EventSyncState.Content)
       is BaseAction.Failed           -> currentState.copy(syncState = EventSyncState.Message(action.reason))
       is BaseAction.CacheSuccess<*>  -> currentState.copy(syncState = EventSyncState.Cache)
+      else                           -> throw IllegalStateException("Wrong Action: $action for this Reducer: ${javaClass.simpleName}")
     }
   }
 }

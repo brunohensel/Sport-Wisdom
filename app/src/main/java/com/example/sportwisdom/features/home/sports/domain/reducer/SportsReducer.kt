@@ -7,9 +7,9 @@ import com.example.sportwisdom.features.home.sports.domain.state.SportState
 import com.example.sportwisdom.features.home.sports.domain.state.SportSyncState
 import javax.inject.Inject
 
-class SportsReducer @Inject constructor() : Reducer<SportState, BaseAction> {
+class SportsReducer @Inject constructor() : Reducer<SportState, BaseAction<*>> {
 
-  override fun invoke(currentState: SportState, action: BaseAction): SportState {
+  override fun invoke(currentState: SportState, action: BaseAction<*>): SportState {
     return when (action) {
       BaseAction.Executing           -> currentState.copy(syncState = SportSyncState.Loading)
       BaseAction.EmptyResult         -> currentState.copy(syncState = SportSyncState.Empty)

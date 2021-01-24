@@ -11,6 +11,7 @@ data class ScheduleState(
 sealed class ScheduleSyncState {
   object Loading : ScheduleSyncState()
   object Content : ScheduleSyncState()
+  object SideEffect : ScheduleSyncState()
   object Empty : ScheduleSyncState()
   data class Message(val msg: String?) : ScheduleSyncState()
 }

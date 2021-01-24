@@ -14,7 +14,7 @@ import kotlinx.coroutines.FlowPreview
 class EventsViewModel @ViewModelInject constructor(
   reducer: EventsReducer,
   actionCreator: HomeActionCreator
-) : BaseStateViewModel<EventsState, HomeIntents, BaseAction>(
+) : BaseStateViewModel<EventsState, HomeIntents, BaseAction<*>>(
   initialState = EventsState(eventsModel = emptyList(), syncState = EventSyncState.Content),
   reducer = reducer,
   action = actionCreator

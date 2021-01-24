@@ -16,7 +16,7 @@ import javax.inject.Inject
 class ScheduleViewModel @ViewModelInject constructor(
   reducer: ScheduleReducer,
   action: ScheduleActionCreator
-) : BaseStateViewModel<ScheduleState, ScheduleIntents, BaseAction>(
+) : BaseStateViewModel<ScheduleState, ScheduleIntents, BaseAction<*>>(
   initialState = ScheduleState(scheduleModel = flowOf(emptyList()), syncState = ScheduleSyncState.Content),
   reducer = reducer,
   action = action
