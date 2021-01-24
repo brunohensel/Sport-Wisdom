@@ -13,6 +13,10 @@ import com.example.sportwisdom.features.schedule.data.ScheduleRepository
 import com.example.sportwisdom.features.schedule.data.ScheduleRepositoryImpl
 import com.example.sportwisdom.features.schedule.data.source.ScheduleLocalDataSource
 import com.example.sportwisdom.features.schedule.data.source.ScheduleLocalDataSourceImpl
+import com.example.sportwisdom.features.search.data.SearchRepository
+import com.example.sportwisdom.features.search.data.SearchRepositoryImpl
+import com.example.sportwisdom.features.search.data.source.remote.SearchRemoteDataSource
+import com.example.sportwisdom.features.search.data.source.remote.SearchRemoteDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,4 +51,12 @@ object AppModule {
   @Singleton
   @Provides
   fun provideScheduleLocalDataSource(sportWisdomDao: SportWisdomDao): ScheduleLocalDataSource = ScheduleLocalDataSourceImpl(sportWisdomDao)
+
+  @Singleton
+  @Provides
+  fun provideSearchRepository(remoteDataSource: SearchRemoteDataSource): SearchRepository = SearchRepositoryImpl(remoteDataSource)
+
+  @Singleton
+  @Provides
+  fun provideSearchRemoteDataSource(apiService: SportApiService): SearchRemoteDataSource = SearchRemoteDataSourceImpl(apiService)
 }
