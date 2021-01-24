@@ -10,6 +10,7 @@ data class EventsState(
 sealed class EventSyncState {
   object Loading : EventSyncState()
   object Content : EventSyncState()
+  object Cache   : EventSyncState()
   object Empty : EventSyncState()
   data class Message(val msg: String?) : EventSyncState()
 }

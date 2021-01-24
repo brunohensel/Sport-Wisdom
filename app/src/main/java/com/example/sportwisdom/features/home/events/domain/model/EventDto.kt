@@ -17,5 +17,5 @@ data class EventDto(
   val strVenue: String?,
   val dateEvent: String,
   val strTime: String,
-  val dateTime: OffsetDateTime? = null
+  var dateTime: OffsetDateTime? = null
 )
