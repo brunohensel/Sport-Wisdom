@@ -2,6 +2,7 @@ package com.example.sportwisdom.application
 
 import android.app.Application
 import com.example.sportwisdom.BuildConfig
+import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -18,6 +19,7 @@ class SportWisdomApp : Application() {
     super.onCreate()
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
+      AndroidThreeTen.init(this)
     }
   }
 }

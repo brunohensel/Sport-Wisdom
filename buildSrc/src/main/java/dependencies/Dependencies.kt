@@ -24,4 +24,5 @@ object Dependencies {
     const val coil = "io.coil-kt:coil:${Versions.coil_version}"
     const val flexbox = "com.google.android:flexbox:${Versions.flexbox_version}"
     const val workerManager = "androidx.work:work-runtime-ktx:${Versions.workManager_version}"
+    const val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threeten_version}"
 }

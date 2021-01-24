@@ -30,4 +30,5 @@ object Versions {
     const val flexbox_version = "2.0.1"
     const val workManager_version = "2.4.0"
     const val arch_version = "2.1.0"
+    const val threeten_version = "1.3.0"
 }

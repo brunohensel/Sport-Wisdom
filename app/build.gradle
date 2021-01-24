@@ -109,6 +109,9 @@ dependencies {
   //WorkManager
   implementation Dependencies.workerManager
 
+  //ThreeTenBp - Date
+  implementation Dependencies.threetenabp
+
   //Room
   implementation Dependencies.room
   implementation Dependencies.room_ktx

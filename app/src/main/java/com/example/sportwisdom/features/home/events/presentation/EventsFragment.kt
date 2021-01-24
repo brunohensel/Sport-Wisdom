@@ -9,8 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.sportwisdom.R
 import com.example.sportwisdom.features.home.domain.HomeEvent
+import com.example.sportwisdom.features.home.events.domain.model.EventDateDto
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.home.events.domain.state.EventSyncState
+import com.example.sportwisdom.util.formatTo
+import com.example.sportwisdom.util.toDate
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_events.*
@@ -18,6 +21,8 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
+import org.threeten.bp.OffsetDateTime
 
 @FlowPreview
 @AndroidEntryPoint
@@ -25,7 +30,8 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
 
   private val viewModel: EventsViewModel by viewModels()
   private val args: EventsFragmentArgs by navArgs()
-  private val eventsAdapter by lazy { EventsAdapter() }
+  private var eventDateDto: EventDateDto = EventDateDto()
+  private val eventsAdapter by lazy { EventsAdapter(::setSchedule) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -39,7 +45,7 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
           when (eventState.syncState) {
             EventSyncState.Loading -> progressBarEvents.isVisible = true
             EventSyncState.Content -> displayEvents(eventState.eventsModel)
-            EventSyncState.Empty   -> handleEmptyState()
+            EventSyncState.Empty -> handleEmptyState()
             is EventSyncState.Message -> displayErrorMessage(eventState.syncState.msg)
           }
         }.launchIn(lifecycleScope)
@@ -67,7 +73,47 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
     rvEvents.adapter = eventsAdapter
   }
 
-  companion object{
+  private fun setSchedule(eventDto: EventDto) {
+    eventDto.setEventDateAndTime()?.let {
+      eventDto.copy(dateTime = it)
+      lifecycleScope.launch {
+        viewModel.process(flowOf(HomeEvent.InsertEvent(eventDto)))
+      }
+    } ?: Snackbar.make(requireView(), "Not valid date and time found to create a notification", Snackbar.LENGTH_LONG).show()
+  }
+
+  private fun EventDto.setEventDateAndTime(): OffsetDateTime? {
+    val year = dateEvent.take(4).takeWhile { it.isDigit() }.toInt()
+    val month = dateEvent.substring(5..7).takeWhile { it.isDigit() }.toInt()
+    val day = dateEvent.substring(8..10).takeWhile { it.isDigit() }.toInt()
+    val hour = when {
+      !strTimestamp.isNullOrBlank() -> strTimestamp.toDate()?.formatTo("HH")
+      strTime != "00:00:00"         -> strTime.take(2)
+      else                          -> null
+    }
+    val minute = when {
+      !strTimestamp.isNullOrBlank() -> strTimestamp.toDate()?.formatTo("mm")
+      strTime != "00:00:00"         -> strTime.substring(3..5).takeWhile { it.isDigit() }
+      else                          -> null
+    }
+
+    eventDateDto = eventDateDto.copy(year = year, month = month, day = day, hour = hour?.toInt(), minute = minute?.toInt())
+
+    return eventDateDto.takeIf { it.isTimeNotNull() }?.let {
+      OffsetDateTime.of(
+        it.year,
+        it.month,
+        it.day,
+        it.hour!!,
+        it.minute!!,
+        0,
+        0,
+        OffsetDateTime.now().offset
+      )
+    }
+  }
+
+  companion object {
     const val SCHEDULE_EXTRA_EVENT = "event_name_extra"
     const val SCHEDULE_EXTRA_EVENT_ID = "event_id_extra"
   }

@@ -1,32 +1,58 @@
 package com.example.sportwisdom.features.home.data.datasource.local
 
+import android.content.Context
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.example.sportwisdom.base.BaseAction
 import com.example.sportwisdom.base.BaseCacheResponseHandler
 import com.example.sportwisdom.database.SportWisdomDao
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
+import com.example.sportwisdom.features.home.events.presentation.EventsFragment.Companion.SCHEDULE_EXTRA_EVENT
+import com.example.sportwisdom.features.home.events.presentation.EventsFragment.Companion.SCHEDULE_EXTRA_EVENT_ID
+import com.example.sportwisdom.job.NotificationWorkManager
 import com.example.sportwisdom.util.safeCacheCall
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.temporal.ChronoUnit
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class HomeLocalDataSourceImpl @Inject constructor(private val dao: SportWisdomDao) : HomeLocalDataSource {
+class HomeLocalDataSourceImpl @Inject constructor(private val dao: SportWisdomDao, context: Context) : HomeLocalDataSource {
 
-  override suspend fun insertEvent(eventDto: EventDto) {
-    safeCacheCall(IO) { dao.insertEvent(eventDto) }
-  }
+  private val workManager = WorkManager.getInstance(context.applicationContext)
 
-  override suspend fun getEvents(): Flow<BaseAction> = flow {
-    val cacheResult = safeCacheCall(IO) { dao.getEvents() }
-    val cacheResponse = object : BaseCacheResponseHandler<Flow<List<EventDto>>>(cacheResult) {
-      override suspend fun handleSuccess(resultObj: Flow<List<EventDto>>): BaseAction.CacheSuccess<Flow<List<EventDto>>> {
+  @FlowPreview
+  override suspend fun insertEvent(eventDto: EventDto): Flow<BaseAction> = flow{
+    val cacheResult = safeCacheCall(IO) { dao.insertEvent(eventDto) }
+    val cacheResponse = object : BaseCacheResponseHandler<Long>(cacheResult) {
+      override suspend fun handleSuccess(resultObj: Long): BaseAction.CacheSuccess<Long> {
         return BaseAction.CacheSuccess(resultObj)
       }
     }.getResult()
+    createWorkManager(eventDto)
     emit(cacheResponse)
   }
 
-  override suspend fun deleteEventById(id: String) {
-    safeCacheCall(IO) { dao.deleteEventById(id) }
+  @FlowPreview
+  private fun createWorkManager(eventDto: EventDto) {
+
+    val timeTilFuture = ChronoUnit.MILLIS.between(OffsetDateTime.now(), eventDto.dateTime)
+    val data = Data.Builder().apply {
+      putString(SCHEDULE_EXTRA_EVENT, eventDto.strEvent)
+      putInt(SCHEDULE_EXTRA_EVENT_ID, eventDto.idEvent.toInt())
+    }
+
+    val work = OneTimeWorkRequest
+      .Builder(NotificationWorkManager::class.java)
+      .setInitialDelay(timeTilFuture, TimeUnit.MILLISECONDS)
+      .setInputData(data.build())
+      .build()
+
+    workManager.enqueue(work)
   }
 }

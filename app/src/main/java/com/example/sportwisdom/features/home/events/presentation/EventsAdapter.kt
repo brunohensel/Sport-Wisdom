@@ -14,26 +14,26 @@ import com.example.sportwisdom.util.formatTo
 import com.example.sportwisdom.util.toDate
 import kotlinx.android.synthetic.main.item_events.view.*
 
-class EventsAdapter : ListAdapter<EventDto, EventsViewHolder>(EventsAdapter) {
+class EventsAdapter(private val setSchedule: (EventDto) -> Unit) : ListAdapter<EventDto, EventsViewHolder>(EventsAdapter) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
     return EventsViewHolder.from(parent)
   }
 
   override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
-    holder.bind(getItem(position))
+    holder.bind(getItem(position), setSchedule)
   }
 
   class EventsViewHolder private constructor(view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(data: EventDto) {
+    fun bind(data: EventDto, setSchedule: (EventDto) -> Unit) {
       with(itemView) {
         txtEvent.text = data.strEvent
         txtVenue.text = if (data.strVenue.isNullOrBlank()) "Unavailable venue" else data.strVenue
         txtTime.text = data.strTimestamp?.toDate()?.formatTo("HH:mm") ?: if (data.strTime == "00:00:00") "Time not Known" else data.strTime
         txtDate.text = data.dateEvent
 
-        imgAddToScheduler.setOnClickListener { }
+        imgAddToScheduler.setOnClickListener { setSchedule(data) }
 
         data.strThumb?.let { path ->
           imgThumbEvent.load(path) {

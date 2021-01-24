@@ -14,7 +14,9 @@ class NotificationWorkManager(private val context: Context, params: WorkerParame
   override fun doWork(): Result {
     val eventName = inputData.getString(SCHEDULE_EXTRA_EVENT)
     val eventId = inputData.getInt(SCHEDULE_EXTRA_EVENT_ID, 0)
+
     Notification(context, eventName, eventId)
+
     return Result.success()
   }
 }

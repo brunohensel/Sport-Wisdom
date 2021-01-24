@@ -1,7 +1,9 @@
 package com.example.sportwisdom.features.home.events.domain.model
 
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import org.threeten.bp.OffsetDateTime
 
 @Entity(tableName = "events_table")
 data class EventDto(
@@ -14,5 +16,6 @@ data class EventDto(
   val strTimestamp: String?,
   val strVenue: String?,
   val dateEvent: String,
-  val strTime: String
+  val strTime: String,
+  val dateTime: OffsetDateTime? = null
 )
