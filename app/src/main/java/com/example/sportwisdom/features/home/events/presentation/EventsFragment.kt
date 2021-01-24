@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.sportwisdom.R
-import com.example.sportwisdom.features.home.domain.HomeEvent
+import com.example.sportwisdom.features.home.domain.HomeIntents
 import com.example.sportwisdom.features.home.events.domain.model.EventDateDto
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.home.events.domain.state.EventSyncState
@@ -37,7 +37,7 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    lifecycleScope.launchWhenCreated { viewModel.process(flowOf(HomeEvent.FetchEvents(args.leagueId))) }
+    lifecycleScope.launchWhenCreated { viewModel.process(flowOf(HomeIntents.FetchEvents(args.leagueId))) }
 
     lifecycleScope.launchWhenStarted {
       viewModel
@@ -86,7 +86,7 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
       eventDto.dateTime = it
       lifecycleScope.launch {
         Timber.i("EventProcess: $eventDto")
-        viewModel.process(flowOf(HomeEvent.InsertEvent(eventDto)))
+        viewModel.process(flowOf(HomeIntents.InsertEvent(eventDto)))
       }
     } ?: Snackbar.make(requireView(), "Time and Date invalid to create a notification", Snackbar.LENGTH_LONG).show()
   }

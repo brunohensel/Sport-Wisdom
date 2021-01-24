@@ -11,15 +11,15 @@ import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @FlowPreview
-class HomeActionCreator @Inject constructor(private val repository: HomeRepository) : Action<HomeEvent, BaseAction> {
+class HomeActionCreator @Inject constructor(private val repository: HomeRepository) : Action<HomeIntents, BaseAction> {
 
-  override fun invoke(event: HomeEvent): Flow<BaseAction> {
+  override fun invoke(intents: HomeIntents): Flow<BaseAction> {
     return flow {
-      val result = when (event) {
-        is HomeEvent.FetchLeagues -> repository.fetchAllLeagues(event.sportType)
-        is HomeEvent.FetchEvents -> repository.fetchEvents(event.leagueId)
-        is HomeEvent.InsertEvent  -> repository.insertEvent(event.eventDto)
-        HomeEvent.FetchSports -> repository.fetchAllSports()
+      val result = when (intents) {
+        is HomeIntents.FetchLeagues -> repository.fetchAllLeagues(intents.sportType)
+        is HomeIntents.FetchEvents  -> repository.fetchEvents(intents.leagueId)
+        is HomeIntents.InsertEvent  -> repository.insertEvent(intents.eventDto)
+        HomeIntents.FetchSports     -> repository.fetchAllSports()
       }
       emit(result)
     }

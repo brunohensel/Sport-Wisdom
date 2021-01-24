@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.sportwisdom.R
-import com.example.sportwisdom.features.home.domain.HomeEvent
+import com.example.sportwisdom.features.home.domain.HomeIntents
 import com.example.sportwisdom.features.home.sports.domain.model.SportDto
 import com.example.sportwisdom.features.home.sports.domain.state.SportSyncState
 import com.google.android.flexbox.AlignItems
@@ -34,7 +34,7 @@ class SportsFragment : Fragment(R.layout.fragment_home) {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    lifecycleScope.launchWhenCreated { viewModel.process(listOf(HomeEvent.FetchSports).asFlow()) }
+    lifecycleScope.launchWhenCreated { viewModel.process(listOf(HomeIntents.FetchSports).asFlow()) }
 
     lifecycleScope.launchWhenStarted {
       viewModel

@@ -9,13 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.sportwisdom.R
-import com.example.sportwisdom.features.home.domain.HomeEvent
+import com.example.sportwisdom.features.home.domain.HomeIntents
 import com.example.sportwisdom.features.home.league.domain.model.LeagueDto
 import com.example.sportwisdom.features.home.league.domain.state.LeagueSyncState
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_events.*
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_league.*
 import kotlinx.android.synthetic.main.fragment_league.txtEmptyLeagueState
 import kotlinx.coroutines.FlowPreview
@@ -34,7 +32,7 @@ class LeagueFragment : Fragment(R.layout.fragment_league) {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    lifecycleScope.launchWhenCreated { viewModel.process(listOf(HomeEvent.FetchLeagues(args.sportDto.strSport)).asFlow()) }
+    lifecycleScope.launchWhenCreated { viewModel.process(listOf(HomeIntents.FetchLeagues(args.sportDto.strSport)).asFlow()) }
 
     lifecycleScope.launchWhenStarted {
       viewModel
