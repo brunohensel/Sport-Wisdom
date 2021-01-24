@@ -61,7 +61,7 @@ class SportsFragment : Fragment(R.layout.fragment_home) {
   }
 
   private fun displayErrorMessage(msg: String?) {
-    progressBarLeagues.isVisible = false
+    progressBar.isVisible = false
     Snackbar.make(requireView(), msg ?: "Unknown error", Snackbar.LENGTH_LONG).show()
   }
 

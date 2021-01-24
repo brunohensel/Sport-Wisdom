@@ -1,13 +1,13 @@
 package com.example.sportwisdom.features.home.domain
 
-import com.example.sportwisdom.CoroutineTestRule
 import com.example.sportwisdom.base.BaseAction
 import com.example.sportwisdom.features.home.data.HomeRepository
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.home.league.domain.model.LeagueDto
 import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
+import com.example.sportwisdom.utils.CoroutineTestRule
+import com.example.sportwisdom.utils.willReturn
 import com.google.common.truth.Truth.assertThat
-import com.nhaarman.mockitokotlin2.given
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -38,8 +38,8 @@ class HomeActionCreatorTest {
     val sportType = "Soccer"
     val event = HomeIntents.FetchLeagues(sportType)
     val leagues = arrayListOf<LeagueDto>().apply {
-      add(LeagueDto("1", "A","Soccer"))
-      add(LeagueDto("2", "B","Baseball"))
+      add(LeagueDto("1", "A", "Soccer"))
+      add(LeagueDto("2", "B", "Baseball"))
     }
     val response = leagues.filter { it.sportType == sportType }
     repository.fetchAllLeagues(sportType) willReturn flowOf(BaseAction.RemoteSuccess(response))
@@ -133,9 +133,32 @@ class HomeActionCreatorTest {
     assertThat(result.take(1).toList()).contains(BaseAction.Executing)
     Assert.assertTrue(result.take(2).toList().contains(BaseAction.Failed(null, "Unknown network error")))
   }
-}
 
-infix fun <T> T.willReturn(value: T) {
-  given(this)
-    .willReturn(value)
+  @Test
+  fun insertEvent_returnCacheSuccess() = runBlockingTest {
+    //Given
+    val eventDto = EventDto(
+      idEvent = "1",
+      idLeague = "",
+      strEvent = "",
+      strLeague = "",
+      strThumb = "",
+      strTimestamp = null,
+      strVenue = null,
+      dateEvent = "",
+      strTime = "",
+      dateTime = null
+    )
+
+    val intent = HomeIntents.InsertEvent(eventDto)
+    repository.insertEvent(eventDto) willReturn flowOf(BaseAction.CacheSuccess(1L))
+
+    //When
+    val result = actionCreator.invoke(intent)
+
+    //Then
+    assertThat(result.count()).isEqualTo(2)
+    assertThat(result.take(1).toList()).contains(BaseAction.Executing)
+    assertThat(result.take(2).toList()).contains(BaseAction.CacheSuccess(1L))
+  }
 }

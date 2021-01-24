@@ -52,4 +52,19 @@ class EventsReducerTest {
     Truth.assertThat(newState.syncState).isEqualTo(EventSyncState.Message(message))
     Truth.assertThat(newState.eventsModel).isEqualTo(events)
   }
+
+  @Test
+  fun empty_test() {
+    //Given
+    val action = BaseAction.EmptyResult
+    val events = emptyList<EventDto>()
+    val currentState = EventsState(events, EventSyncState.Empty)
+
+    //When
+    val newState = EventsReducer().invoke(currentState, action)
+
+    //Then
+    Truth.assertThat(newState.syncState).isEqualTo(EventSyncState.Empty)
+    Truth.assertThat(newState.eventsModel).isEqualTo(events)
+  }
 }

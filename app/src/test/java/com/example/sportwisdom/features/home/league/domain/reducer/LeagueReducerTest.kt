@@ -53,4 +53,19 @@ class LeagueReducerTest {
     Truth.assertThat(newState.syncState).isEqualTo(LeagueSyncState.Message(message))
     Truth.assertThat(newState.leagueModel).isEqualTo(leagues)
   }
+
+  @Test
+  fun empty_test() {
+    //Given
+    val action = BaseAction.EmptyResult
+    val leagues = emptyList<LeagueDto>()
+    val currentState = LeagueState(leagues, LeagueSyncState.Loading)
+
+    //When
+    val newState = LeagueReducer().invoke(currentState, action)
+
+    //Then
+    Truth.assertThat(newState.syncState).isEqualTo(LeagueSyncState.Empty)
+    Truth.assertThat(newState.leagueModel).isEqualTo(leagues)
+  }
 }

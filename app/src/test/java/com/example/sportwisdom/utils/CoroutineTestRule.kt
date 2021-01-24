@@ -1,4 +1,4 @@
-package com.example.sportwisdom
+package com.example.sportwisdom.utils
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

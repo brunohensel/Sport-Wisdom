@@ -53,4 +53,19 @@ class SportsReducerTest {
     assertThat(newState.syncState).isEqualTo(SportSyncState.Message(message))
     assertThat(newState.sportsModel.sports).isEqualTo(sports.sports)
   }
+
+  @Test
+  fun empty_test() {
+    //Given
+    val action = BaseAction.EmptyResult
+    val sports = SportsModel(emptyList())
+    val currentState = SportState(sports, SportSyncState.Loading)
+
+    //When
+    val newState = SportsReducer().invoke(currentState, action)
+
+    //Then
+    assertThat(newState.syncState).isEqualTo(SportSyncState.Empty)
+    assertThat(newState.sportsModel.sports).isEqualTo(sports.sports)
+  }
 }
