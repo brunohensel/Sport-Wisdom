@@ -22,8 +22,14 @@ class ScheduleLocalDataSourceImpl @Inject constructor(private val dao: SportWisd
     emit(cacheResponse)
   }
 
-  override suspend fun deleteAllEvents(): Flow<BaseAction> {
-    TODO("Not yet implemented")
+  override suspend fun deleteAllEvents(): Flow<BaseAction> = flow {
+    val cacheResult = safeCacheCall(IO) { dao.deleteAllEvents() }
+    val cacheResponse = object : BaseCacheResponseHandler<Unit>(cacheResult) {
+      override suspend fun handleSuccess(resultObj: Unit): BaseAction.CacheSuccess<Unit> {
+        return BaseAction.CacheSuccess(resultObj)
+      }
+    }.getResult()
+    emit(cacheResponse)
   }
 
   override suspend fun deleteEvent(eventId: String): Flow<BaseAction> = flow {

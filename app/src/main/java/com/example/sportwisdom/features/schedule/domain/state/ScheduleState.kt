@@ -1,9 +1,10 @@
 package com.example.sportwisdom.features.schedule.domain.state
 
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
+import kotlinx.coroutines.flow.Flow
 
 data class ScheduleState(
-  val scheduleModel: List<EventDto>,
+  val scheduleModel: Flow<List<EventDto>>,
   val syncState: ScheduleSyncState
 )
 

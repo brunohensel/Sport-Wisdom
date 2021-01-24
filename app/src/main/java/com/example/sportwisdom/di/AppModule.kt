@@ -9,6 +9,10 @@ import com.example.sportwisdom.features.home.data.datasource.local.HomeLocalData
 import com.example.sportwisdom.features.home.data.datasource.local.HomeLocalDataSourceImpl
 import com.example.sportwisdom.features.home.data.datasource.remote.HomeRemoteDataSource
 import com.example.sportwisdom.features.home.data.datasource.remote.HomeRemoteDataSourceImpl
+import com.example.sportwisdom.features.schedule.data.ScheduleRepository
+import com.example.sportwisdom.features.schedule.data.ScheduleRepositoryImpl
+import com.example.sportwisdom.features.schedule.data.source.ScheduleLocalDataSource
+import com.example.sportwisdom.features.schedule.data.source.ScheduleLocalDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,7 +36,15 @@ object AppModule {
 
   @Singleton
   @Provides
-  fun providesHomeLocalDataSource(sportWisdomDao: SportWisdomDao, @ApplicationContext context: Context): HomeLocalDataSource{
+  fun providesHomeLocalDataSource(sportWisdomDao: SportWisdomDao, @ApplicationContext context: Context): HomeLocalDataSource {
     return HomeLocalDataSourceImpl(sportWisdomDao, context)
   }
+
+  @Singleton
+  @Provides
+  fun provideScheduleRepository(localDataSource: ScheduleLocalDataSource): ScheduleRepository = ScheduleRepositoryImpl(localDataSource)
+
+  @Singleton
+  @Provides
+  fun provideScheduleLocalDataSource(sportWisdomDao: SportWisdomDao): ScheduleLocalDataSource = ScheduleLocalDataSourceImpl(sportWisdomDao)
 }

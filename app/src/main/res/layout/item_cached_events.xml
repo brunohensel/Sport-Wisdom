@@ -21,7 +21,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imgThumbEvent"
+                android:id="@+id/imgThumbCachedEvent"
                 android:layout_width="wrap_content"
                 android:layout_height="130dp"
                 android:scaleType="centerCrop"
@@ -30,7 +30,7 @@
                 tools:src="@drawable/dafault_image" />
 
             <TextView
-                android:id="@+id/txtEventTitle"
+                android:id="@+id/txtCachedEventTitle"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,91 +39,91 @@
                 android:textSize="@dimen/text_16"
                 android:layout_marginTop="@dimen/margin_8"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imgThumbEvent" />
+                app:layout_constraintTop_toBottomOf="@+id/imgThumbCachedEvent" />
 
             <TextView
-                android:id="@+id/txtEvent"
+                android:id="@+id/txtCachedEvent"
                 style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintEnd_toEndOf="@+id/txtVenue"
-                app:layout_constraintStart_toStartOf="@+id/txtVenue"
-                app:layout_constraintTop_toTopOf="@+id/txtEventTitle"
+                app:layout_constraintEnd_toEndOf="@+id/txtCachedVenue"
+                app:layout_constraintStart_toStartOf="@+id/txtCachedVenue"
+                app:layout_constraintTop_toTopOf="@+id/txtCachedEventTitle"
                 tools:text="sakjbasbcjks" />
 
             <TextView
-                android:id="@+id/txtVenueTitle"
+                android:id="@+id/txtCachedVenueTitle"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
                 android:text="@string/venue_title"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintStart_toStartOf="@+id/txtEventTitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtEventTitle" />
+                app:layout_constraintStart_toStartOf="@+id/txtCachedEventTitle"
+                app:layout_constraintTop_toBottomOf="@+id/txtCachedEventTitle" />
 
             <TextView
-                android:id="@+id/txtVenue"
+                android:id="@+id/txtCachedVenue"
                 style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintBottom_toBottomOf="@+id/txtVenueTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCachedVenueTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/txtVenueTitle"
-                app:layout_constraintTop_toTopOf="@+id/txtVenueTitle"
+                app:layout_constraintStart_toEndOf="@+id/txtCachedVenueTitle"
+                app:layout_constraintTop_toTopOf="@+id/txtCachedVenueTitle"
                 tools:text="djnsjns" />
 
             <TextView
-                android:id="@+id/txtDateTitle"
+                android:id="@+id/txtCachedDateTitle"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
                 android:text="@string/date_title"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintStart_toStartOf="@+id/txtVenueTitle"
-                app:layout_constraintTop_toBottomOf="@+id/txtVenueTitle" />
+                app:layout_constraintStart_toStartOf="@+id/txtCachedVenueTitle"
+                app:layout_constraintTop_toBottomOf="@+id/txtCachedVenueTitle" />
 
             <TextView
-                android:id="@+id/txtDate"
+                android:id="@+id/txtCachedDate"
                 style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintBottom_toBottomOf="@+id/txtDateTitle"
-                app:layout_constraintStart_toStartOf="@+id/txtVenue"
-                app:layout_constraintTop_toTopOf="@+id/txtDateTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCachedDateTitle"
+                app:layout_constraintStart_toStartOf="@+id/txtCachedVenue"
+                app:layout_constraintTop_toTopOf="@+id/txtCachedDateTitle"
                 tools:text="djnsjns" />
 
 
             <TextView
-                android:id="@+id/txtTime"
+                android:id="@+id/txtCachedTime"
                 style="@style/TextAppearance.MaterialComponents.Headline5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:textSize="@dimen/text_16"
-                app:layout_constraintBottom_toBottomOf="@+id/txtDateTitle"
-                app:layout_constraintStart_toEndOf="@+id/txtDate"
-                app:layout_constraintTop_toTopOf="@+id/txtDateTitle"
+                app:layout_constraintBottom_toBottomOf="@+id/txtCachedDateTitle"
+                app:layout_constraintStart_toEndOf="@+id/txtCachedDate"
+                app:layout_constraintTop_toTopOf="@+id/txtCachedDateTitle"
                 tools:text="djnsjns" />
 
 
             <ImageView
-                android:id="@+id/imgAddToScheduler"
+                android:id="@+id/imgDeleteFromScheduler"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginBottom="@dimen/margin_8"
                 android:layout_marginTop="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_16"
-                android:src="@drawable/ic_schedule"
+                android:src="@drawable/ic_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtVenue" />
+                app:layout_constraintTop_toBottomOf="@+id/txtCachedVenue" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

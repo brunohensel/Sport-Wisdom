@@ -8,14 +8,14 @@ import javax.inject.Inject
 class ScheduleRepositoryImpl @Inject constructor(private val localDataSource: ScheduleLocalDataSource) : ScheduleRepository {
 
   override suspend fun fetchCachedEvents(): Flow<BaseAction> {
-    TODO("Not yet implemented")
+    return localDataSource.fetchCachedEvents()
   }
 
   override suspend fun deleteAllEvents(): Flow<BaseAction> {
-    TODO("Not yet implemented")
+    return localDataSource.deleteAllEvents()
   }
 
   override suspend fun deleteEvent(eventId: String): Flow<BaseAction> {
-    TODO("Not yet implemented")
+    return localDataSource.deleteEvent(eventId)
   }
 }

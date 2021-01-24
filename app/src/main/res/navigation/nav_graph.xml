@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_leagueFragment"
             app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
     </fragment>
 
     <fragment
@@ -36,5 +39,11 @@
         <argument
             android:name="leagueId"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.example.sportwisdom.features.schedule.presentation.ScheduleFragment"
+        android:label="Scheduled Events"
+        tools:layout="@layout/fragment_schedule" >
     </fragment>
 </navigation>

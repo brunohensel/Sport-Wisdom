@@ -7,20 +7,20 @@ import kotlinx.coroutines.flow.*
 import timber.log.Timber
 
 @FlowPreview
-abstract class BaseStateViewModel<State, Event, Action>(
+abstract class BaseStateViewModel<State, Intents, Action>(
   private val initialState: State,
   private val reducer: (State, Action) -> State,
-  private val action: (Event) -> Flow<Action>
+  private val action: (Intents) -> Flow<Action>
 ) : ViewModel() {
 
   //Producer
-  private val event = MutableSharedFlow<Event>()
+  private val event = MutableSharedFlow<Intents>()
 
   //Consumer
   val state: StateFlow<State> = toState()
 
-  suspend fun process(event: Flow<Event>) {
-    event.collect {
+  suspend fun process(intents: Flow<Intents>) {
+    intents.collect {
       this.event.emit(it)//suspend
     }
   }
