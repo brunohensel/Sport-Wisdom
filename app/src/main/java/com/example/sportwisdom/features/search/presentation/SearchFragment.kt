@@ -1,35 +1,90 @@
 package com.example.sportwisdom.features.search.presentation
 
 import android.os.Bundle
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.sportwisdom.R
+import com.example.sportwisdom.features.search.domain.model.TeamDto
 import com.example.sportwisdom.features.search.domain.reducer.SearchIntents
+import com.example.sportwisdom.features.search.domain.state.SearchSyncState
+import com.example.sportwisdom.util.getTextAfterChangeAsFlow
+import com.example.sportwisdom.util.hideSoftKeyboard
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import timber.log.Timber
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 @FlowPreview
 @AndroidEntryPoint
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
   private val viewModel: SearchViewModel by viewModels()
+  private val searchAdapter by lazy { SearchAdapter(::onClicked) }
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    lifecycleScope.launchWhenCreated { viewModel.process(flowOf(SearchIntents.SearchForTeamsByName("Arsenal"))) }
-
     lifecycleScope.launchWhenStarted {
       viewModel
         .state
-        .map {
-          Timber.i("Search state: $it")
+        .map { searchState ->
+          when (searchState.syncState) {
+            SearchSyncState.Loading -> progressBarSearch.isVisible = true
+            SearchSyncState.Empty -> handleEmptyState()
+            SearchSyncState.Content -> displayTeams(searchState.teamsModel)
+            SearchSyncState.SideEffect -> progressBarSearch.isVisible = false
+            is SearchSyncState.Message -> displayErrorMessage(searchState.syncState.msg)
+          }
         }.launchIn(lifecycleScope)
     }
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    rvSearchTeams.adapter = searchAdapter
+
+    lifecycleScope.launch {
+      edtSearchTeam
+        .getTextAfterChangeAsFlow()
+        .debounce(800)
+        .map { query ->
+          viewModel.process(flowOf(SearchIntents.SearchForTeamsByName(query)))
+          imgClearText.isVisible = query.isNotEmpty()
+          if (query.isEmpty()) {
+            requireActivity().hideSoftKeyboard()
+          }
+        }
+        .collect()
+    }
+
+    imgClearText.setOnClickListener { edtSearchTeam.text.clear() }
+  }
+
+  private fun displayTeams(teamsModel: List<TeamDto>) {
+    requireActivity().hideSoftKeyboard()
+    progressBarSearch.isVisible = false
+    searchAdapter.submitList(teamsModel)
+  }
+
+  private fun onClicked(teamDto: TeamDto) {
+
+  }
+
+  private fun handleEmptyState() {
+    requireActivity().hideSoftKeyboard()
+    txtEmptySearchState.isVisible = true
+    progressBarSearch.isVisible = false
+  }
+
+  private fun displayErrorMessage(msg: String?) {
+    requireActivity().hideSoftKeyboard()
+    progressBarSearch.isVisible = false
+    Snackbar.make(requireView(), msg ?: "Unknown error", Snackbar.LENGTH_LONG).show()
   }
 }
