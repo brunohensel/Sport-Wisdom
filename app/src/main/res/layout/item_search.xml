@@ -42,13 +42,14 @@
                 app:layout_constraintEnd_toStartOf="@id/imgAddToFavorite"
                 app:layout_constraintStart_toEndOf="@id/imgSearchTeamLogo"
                 app:layout_constraintTop_toTopOf="@id/imgSearchTeamLogo"
-                tools:text="shabdkhjasbnkdbaskacascas" />
+                tools:text="shabdkhjasbnkdbaskacscas" />
 
             <ImageView
                 android:id="@+id/imgAddToFavorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_24"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:padding="@dimen/padding_8"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"

@@ -53,5 +53,19 @@
         android:id="@+id/searchFragment"
         android:name="com.example.sportwisdom.features.search.presentation.SearchFragment"
         android:label="Teams"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_teamDetailFragment"
+            app:destination="@id/teamDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamDetailFragment"
+        android:name="com.example.sportwisdom.features.search.presentation.TeamDetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_team_detail" >
+
+        <argument
+            android:name="team"
+            app:argType="com.example.sportwisdom.features.search.domain.model.TeamDto"/>
+    </fragment>
 </navigation>

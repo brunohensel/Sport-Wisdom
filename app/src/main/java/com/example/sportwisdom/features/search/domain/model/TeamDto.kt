@@ -1,5 +1,7 @@
 package com.example.sportwisdom.features.search.domain.model
 
+import java.io.Serializable
+
 data class TeamDto(
   val idTeam: String,
   val strTeam: String,
@@ -14,4 +16,4 @@ data class TeamDto(
   val strTeamBadge: String?,
   val strTeamJersey: String?,
   val strTeamLogo: String?,
-)
+): Serializable

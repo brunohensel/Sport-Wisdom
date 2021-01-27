@@ -6,6 +6,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.sportwisdom.R
 import com.example.sportwisdom.features.search.domain.model.TeamDto
 import com.example.sportwisdom.features.search.domain.reducer.SearchIntents
@@ -24,8 +25,7 @@ import kotlinx.coroutines.launch
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
   private val viewModel: SearchViewModel by viewModels()
-  private val searchAdapter by lazy { SearchAdapter(::onClicked) }
-
+  private val searchAdapter by lazy { SearchAdapter(::addToFavorite, ::openDetail) }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -67,17 +67,24 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
   }
 
   private fun displayTeams(teamsModel: List<TeamDto>) {
+    rvSearchTeams.isVisible = true
     requireActivity().hideSoftKeyboard()
     progressBarSearch.isVisible = false
     searchAdapter.submitList(teamsModel)
   }
 
-  private fun onClicked(teamDto: TeamDto) {
+  private fun addToFavorite(teamDto: TeamDto) {
 
+  }
+
+  private fun openDetail(teamDto: TeamDto) {
+    val action = SearchFragmentDirections.actionSearchFragmentToTeamDetailFragment(teamDto)
+    findNavController().navigate(action)
   }
 
   private fun handleEmptyState() {
     requireActivity().hideSoftKeyboard()
+    rvSearchTeams.isVisible = false
     txtEmptySearchState.isVisible = true
     progressBarSearch.isVisible = false
   }
