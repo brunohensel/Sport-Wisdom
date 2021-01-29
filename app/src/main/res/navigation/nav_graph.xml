@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
 
     <fragment
@@ -67,5 +70,14 @@
         <argument
             android:name="team"
             app:argType="com.example.sportwisdom.features.search.domain.model.TeamDto"/>
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.sportwisdom.features.favorite.presantation.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_teamDetailFragment"
+            app:destination="@id/teamDetailFragment" />
     </fragment>
 </navigation>
