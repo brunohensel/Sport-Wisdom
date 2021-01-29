@@ -17,6 +17,7 @@ class SearchActionCreator @Inject constructor(private val searchRepository: Sear
     return flow {
       val result = when(intents){
         is SearchIntents.SearchForTeamsByName -> searchRepository.searchTeams(intents.teamName)
+        is SearchIntents.AddToFavorites       -> searchRepository.insertTeam(intents.team)
       }
       emit(result)
     }

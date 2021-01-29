@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:motionDebug="SHOW_PATH"
-            android:minHeight="80dp"
+            android:minHeight="60dp"
             app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"
             app:layoutDescription="@xml/fragment_team_detail_scene">
 
@@ -34,15 +34,15 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
-                android:id="@+id/imgStadium"
+                android:id="@+id/imgTeamBanner"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:scaleType="fitXY"/>
 
             <ImageView
-                android:id="@+id/imgTeamBadge"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:id="@+id/imgTeamLogo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -56,10 +56,88 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/long_text" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtStadiumTitle"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_8"
+                android:text="@string/stadium_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtStadiumDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/text_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txtStadiumTitle"
+                app:layout_constraintTop_toBottomOf="@+id/txtStadiumTitle" />
+
+            <TextView
+                android:id="@+id/txtTeamDescTitle"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8"
+                android:layout_marginTop="@dimen/margin_16"
+                android:text="@string/team_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtStadiumDesc" />
+
+            <TextView
+                android:id="@+id/txtTeamDesc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginEnd="@dimen/text_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txtStadiumTitle"
+                app:layout_constraintTop_toBottomOf="@+id/txtTeamDescTitle" />
+
+            <ImageView
+                android:id="@+id/imgTeamBadgeDetail"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="@dimen/margin_16"
+                android:layout_marginStart="@dimen/margin_8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgTeamStadium"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtTeamDesc" />
+
+            <ImageView
+                android:id="@+id/imgTeamStadium"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgTeamBadgeDetail"
+                app:layout_constraintEnd_toStartOf="@+id/imgTeamSkirt"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgTeamBadgeDetail"
+                app:layout_constraintTop_toTopOf="@+id/imgTeamBadgeDetail" />
+
+            <ImageView
+                android:id="@+id/imgTeamSkirt"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="@dimen/margin_8"
+                app:layout_constraintBottom_toBottomOf="@+id/imgTeamStadium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/imgTeamStadium"
+                app:layout_constraintTop_toTopOf="@+id/imgTeamStadium" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.core.widget.NestedScrollView>
 
 

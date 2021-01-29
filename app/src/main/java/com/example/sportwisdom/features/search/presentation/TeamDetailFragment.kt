@@ -14,18 +14,19 @@ class TeamDetailFragment : Fragment(R.layout.fragment_team_detail) {
 
   private val args: TeamDetailFragmentArgs by navArgs()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-
-  }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    imgStadium.load(args.team.strStadiumThumb){
+
+    txtStadiumDesc.text = args.team.strStadiumDescription
+    txtTeamDesc.text = args.team.strDescriptionEN
+    imgTeamBanner.load(args.team.strTeamBanner){
       crossfade(true)
     }
 
-    imgTeamBadge.load(args.team.strTeamBadge)
+    imgTeamLogo.load(args.team.strTeamLogo)
+    imgTeamBadgeDetail.load(args.team.strTeamBadge)
+    imgTeamStadium.load(args.team.strStadiumThumb)
+    imgTeamSkirt.load(args.team.strTeamJersey)
     coordinateMotion()
   }
 

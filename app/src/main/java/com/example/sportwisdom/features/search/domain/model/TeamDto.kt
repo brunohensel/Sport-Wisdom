@@ -16,4 +16,5 @@ data class TeamDto(
   val strTeamBadge: String?,
   val strTeamJersey: String?,
   val strTeamLogo: String?,
+  val strTeamBanner: String?,
 ): Serializable
