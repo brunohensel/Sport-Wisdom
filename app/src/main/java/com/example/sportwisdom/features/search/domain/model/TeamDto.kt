@@ -1,8 +1,12 @@
 package com.example.sportwisdom.features.search.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+@Entity(tableName = "teams_table")
 data class TeamDto(
+  @PrimaryKey(autoGenerate = false)
   val idTeam: String,
   val strTeam: String,
   val strAlternate: String?,

@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
+import com.example.sportwisdom.features.search.domain.model.TeamDto
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,4 +23,16 @@ interface SportWisdomDao {
 
   @Query("DELETE from events_table ")
   suspend fun deleteAllEvents()
+
+  @Insert(onConflict = OnConflictStrategy.REPLACE)
+  suspend fun insertTeam(teamDto: TeamDto): Long
+
+  @Query("SELECT * from teams_table")
+  fun getTeams(): Flow<List<TeamDto>>
+
+  @Query("DELETE from teams_table WHERE idTeam = :id")
+  suspend fun deleteTeamById(id: String): Int
+
+  @Query("DELETE from teams_table ")
+  suspend fun deleteAllTeams()
 }
