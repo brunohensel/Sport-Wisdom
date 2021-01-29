@@ -15,9 +15,12 @@ class SearchRemoteDataSourceImpl(private val sportApiService: SportApiService) :
     val networkResult = safeApiCall(IO){sportApiService.fetchTeams(teamName).teams}
     val networkResponse = object : BaseApiResponseHandler<Any, List<TeamDto>?>(networkResult){
       override suspend fun handleSuccess(resultObj: List<TeamDto>?): BaseAction<Any> {
-        return if (resultObj.isNullOrEmpty()) BaseAction.EmptyResult else BaseAction.RemoteSuccess(resultObj)
+        return if (resultObj.isNullOrEmpty()) BaseAction.EmptyResult else BaseAction.RemoteSuccess(resultObj.withImage())
       }
     }.getResult()
     emit(networkResponse)
   }
+
+  private fun List<TeamDto>.withImage()= filter{
+    !it.strStadiumThumb.isNullOrEmpty() && !it.strTeamLogo.isNullOrEmpty() && !it.strTeamBadge.isNullOrEmpty() && !it.strTeamBanner.isNullOrEmpty()}
 }

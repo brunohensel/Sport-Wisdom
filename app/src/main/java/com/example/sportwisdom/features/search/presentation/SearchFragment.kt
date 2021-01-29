@@ -57,6 +57,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     lifecycleScope.launch {
       edtSearchTeam
         .getTextAfterChangeAsFlow()
+        .filter { it.isNotEmpty() }
         .debounce(800)
         .map { query ->
           viewModel.process(flowOf(SearchIntents.SearchForTeamsByName(query)))
@@ -85,6 +86,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
   }
 
   private fun openDetail(teamDto: TeamDto) {
+    edtSearchTeam.text.clear()
     val action = SearchFragmentDirections.actionSearchFragmentToTeamDetailFragment(teamDto)
     findNavController().navigate(action)
   }
