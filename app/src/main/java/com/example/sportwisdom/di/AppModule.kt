@@ -3,6 +3,10 @@ package com.example.sportwisdom.di
 import android.content.Context
 import com.example.sportwisdom.database.SportWisdomDao
 import com.example.sportwisdom.features.apiservice.SportApiService
+import com.example.sportwisdom.features.favorite.data.FavoriteRepository
+import com.example.sportwisdom.features.favorite.data.FavoriteRepositoryImpl
+import com.example.sportwisdom.features.favorite.data.source.FavoriteLocalDataSource
+import com.example.sportwisdom.features.favorite.data.source.FavoriteLocalDataSourceImpl
 import com.example.sportwisdom.features.home.data.HomeRepository
 import com.example.sportwisdom.features.home.data.HomeRepositoryImpl
 import com.example.sportwisdom.features.home.data.datasource.local.HomeLocalDataSource
@@ -67,4 +71,12 @@ object AppModule {
   @Singleton
   @Provides
   fun provideSearchLocalDataSource(dao: SportWisdomDao): SearchLocalDataSource = SearchLocalDataSourceImpl(dao)
+
+  @Singleton
+  @Provides
+  fun provideFavoriteLocalDataSource(dao: SportWisdomDao): FavoriteLocalDataSource = FavoriteLocalDataSourceImpl(dao)
+
+  @Singleton
+  @Provides
+  fun provideFavoriteRepository(localDataSource: FavoriteLocalDataSource): FavoriteRepository = FavoriteRepositoryImpl(localDataSource)
 }
