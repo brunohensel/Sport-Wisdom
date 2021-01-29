@@ -14,7 +14,7 @@ class SearchLocalDataSourceImpl(private val dao: SportWisdomDao) : SearchLocalDa
     val cacheResult = safeCacheCall(IO) { dao.insertTeam(team) }
     val cacheResponse = object : BaseCacheResponseHandler<Any, Long>(cacheResult) {
       override suspend fun handleSuccess(resultObj: Long): BaseAction<Any> {
-        return if (resultObj > 0) BaseAction.CacheSuccess(resultObj) else BaseAction.Failed(reason = "Was not possible to insert the team: $team in db")
+        return if (resultObj > 0) BaseAction.SideEffect(resultObj) else BaseAction.Failed(reason = "Was not possible to insert the team: $team in db")
       }
     }.getResult()
     emit(cacheResponse)

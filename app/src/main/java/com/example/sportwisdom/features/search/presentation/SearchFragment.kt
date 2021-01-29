@@ -38,11 +38,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             SearchSyncState.Loading -> progressBarSearch.isVisible = true
             SearchSyncState.Empty -> handleEmptyState()
             SearchSyncState.Content -> displayTeams(searchState.teamsModel)
-            SearchSyncState.SideEffect -> progressBarSearch.isVisible = false
+            SearchSyncState.SideEffect -> handleSideEffect()
             is SearchSyncState.Message -> displayErrorMessage(searchState.syncState.msg)
           }
         }.launchIn(lifecycleScope)
     }
+  }
+
+  private fun handleSideEffect() {
+    progressBarSearch.isVisible = false
+    Snackbar.make(requireView(), "Team saved", Snackbar.LENGTH_SHORT).show()
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,7 +79,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
   }
 
   private fun addToFavorite(teamDto: TeamDto) {
-
+    lifecycleScope.launch {
+      viewModel.process(flowOf(SearchIntents.AddToFavorites(teamDto)))
+    }
   }
 
   private fun openDetail(teamDto: TeamDto) {
