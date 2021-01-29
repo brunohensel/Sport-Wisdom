@@ -60,6 +60,7 @@ class SearchActionCreatorTest {
           strTeamBadge = "",
           strTeamJersey = "",
           strTeamLogo = "",
+          strTeamBanner = ""
         )
       )
     }
