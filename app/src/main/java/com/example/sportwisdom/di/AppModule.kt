@@ -1,6 +1,7 @@
 package com.example.sportwisdom.di
 
 import android.content.Context
+import androidx.work.WorkManager
 import com.example.sportwisdom.database.SportWisdomDao
 import com.example.sportwisdom.features.apiservice.SportApiService
 import com.example.sportwisdom.features.favorite.data.FavoriteRepository
@@ -79,4 +80,5 @@ object AppModule {
   @Singleton
   @Provides
   fun provideFavoriteRepository(localDataSource: FavoriteLocalDataSource): FavoriteRepository = FavoriteRepositoryImpl(localDataSource)
+
 }

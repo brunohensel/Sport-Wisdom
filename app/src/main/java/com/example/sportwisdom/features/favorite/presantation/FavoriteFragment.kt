@@ -2,8 +2,8 @@ package com.example.sportwisdom.features.favorite.presantation
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -33,12 +33,12 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     lifecycleScope.launchWhenStarted {
       viewModel
         .state
-        .map {favoriteState ->
-          when(favoriteState.syncState){
+        .map { favoriteState ->
+          when (favoriteState.syncState) {
             FavoriteSyncState.SideEffect -> setProgressBar(false)
-            FavoriteSyncState.Loading    -> setProgressBar(true)
-            FavoriteSyncState.Content    -> displayTeams(favoriteState.favoriteModel)
-            FavoriteSyncState.Empty      -> handleEmptyState()
+            FavoriteSyncState.Loading -> setProgressBar(true)
+            FavoriteSyncState.Content -> displayTeams(favoriteState.favoriteModel)
+            FavoriteSyncState.Empty -> handleEmptyState()
             is FavoriteSyncState.Message -> displayErrorMessage(favoriteState.syncState.msg)
           }
         }.launchIn(lifecycleScope)
@@ -53,9 +53,9 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
   private fun displayTeams(favoriteModel: Flow<List<TeamDto>>) {
     setProgressBar(false)
     lifecycleScope.launch {
-      favoriteModel.collect {teams ->
+      favoriteModel.collect { teams ->
         txtEmptyCachedTeamState.isVisible = teams.isEmpty()
-        if (teams.isNotEmpty()) favoriteAdapter.submitList(teams)
+        favoriteAdapter.submitList(teams)
       }
     }
   }
@@ -71,7 +71,7 @@ class FavoriteFragment : Fragment(R.layout.fragment_favorite) {
     }
   }
 
-  private fun setProgressBar(isVisible: Boolean){
+  private fun setProgressBar(isVisible: Boolean) {
     progressBarCachedTeams.isVisible = isVisible
   }
 

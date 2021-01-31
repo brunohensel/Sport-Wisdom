@@ -55,7 +55,7 @@ class ScheduleFragment : Fragment(R.layout.fragment_schedule) {
     lifecycleScope.launch {
       eventsModel.collect { cachedEvents ->
         txtEmptyCachedEventsState.isVisible = cachedEvents.isEmpty()
-        if (cachedEvents.isNotEmpty()) scheduleAdapter.submitList(cachedEvents)
+         scheduleAdapter.submitList(cachedEvents)
       }
     }
   }
