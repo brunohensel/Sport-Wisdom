@@ -47,8 +47,8 @@ object AppModule {
 
   @Singleton
   @Provides
-  fun providesHomeLocalDataSource(sportWisdomDao: SportWisdomDao, @ApplicationContext context: Context): HomeLocalDataSource {
-    return HomeLocalDataSourceImpl(sportWisdomDao, context)
+  fun providesHomeLocalDataSource(sportWisdomDao: SportWisdomDao, workManager: WorkManager): HomeLocalDataSource {
+    return HomeLocalDataSourceImpl(sportWisdomDao, workManager)
   }
 
   @Singleton
@@ -81,4 +81,7 @@ object AppModule {
   @Provides
   fun provideFavoriteRepository(localDataSource: FavoriteLocalDataSource): FavoriteRepository = FavoriteRepositoryImpl(localDataSource)
 
+  @Singleton
+  @Provides
+  fun provideWorkManager(@ApplicationContext context: Context) = WorkManager.getInstance(context)
 }

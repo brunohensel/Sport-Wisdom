@@ -25,9 +25,7 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class HomeLocalDataSourceImpl @Inject constructor(private val dao: SportWisdomDao, context: Context) : HomeLocalDataSource {
-
-  private val workManager = WorkManager.getInstance(context.applicationContext)
+class HomeLocalDataSourceImpl @Inject constructor(private val dao: SportWisdomDao, private val workManager: WorkManager) : HomeLocalDataSource {
 
   @FlowPreview
   override suspend fun insertEvent(eventDto: EventDto): Flow<BaseAction<*>> = flow {
