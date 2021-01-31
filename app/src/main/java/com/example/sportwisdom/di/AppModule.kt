@@ -57,7 +57,9 @@ object AppModule {
 
   @Singleton
   @Provides
-  fun provideScheduleLocalDataSource(sportWisdomDao: SportWisdomDao): ScheduleLocalDataSource = ScheduleLocalDataSourceImpl(sportWisdomDao)
+  fun provideScheduleLocalDataSource(sportWisdomDao: SportWisdomDao, workManager: WorkManager): ScheduleLocalDataSource {
+    return ScheduleLocalDataSourceImpl(sportWisdomDao, workManager)
+  }
 
   @Singleton
   @Provides

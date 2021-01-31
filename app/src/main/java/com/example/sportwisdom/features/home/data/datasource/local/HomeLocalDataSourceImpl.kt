@@ -1,12 +1,10 @@
 package com.example.sportwisdom.features.home.data.datasource.local
 
-import android.content.Context
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.example.sportwisdom.base.BaseAction
 import com.example.sportwisdom.base.BaseCacheResponseHandler
-import com.example.sportwisdom.base.CacheResult
 import com.example.sportwisdom.database.SportWisdomDao
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.home.events.presentation.EventsFragment.Companion.SCHEDULE_EXTRA_EVENT
@@ -17,11 +15,8 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.toList
 import org.threeten.bp.OffsetDateTime
 import org.threeten.bp.temporal.ChronoUnit
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -51,6 +46,7 @@ class HomeLocalDataSourceImpl @Inject constructor(private val dao: SportWisdomDa
     val work = OneTimeWorkRequest
       .Builder(NotificationWorkManager::class.java)
       .setInitialDelay(timeTilFuture, TimeUnit.MILLISECONDS)
+      .addTag(eventDto.idEvent)
       .setInputData(data.build())
       .build()
 
