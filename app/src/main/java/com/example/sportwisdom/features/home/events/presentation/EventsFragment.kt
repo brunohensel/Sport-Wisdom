@@ -1,7 +1,12 @@
 package com.example.sportwisdom.features.home.events.presentation
 
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +18,7 @@ import com.example.sportwisdom.features.home.events.domain.model.EventDateDto
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.home.events.domain.state.EventSyncState
 import com.example.sportwisdom.util.formatTo
+import com.example.sportwisdom.util.setIcon
 import com.example.sportwisdom.util.toDate
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +67,8 @@ class EventsFragment : Fragment(R.layout.fragment_events) {
 
   private fun handleCache() {
     progressBarEvents.isVisible = false
-    Snackbar.make(requireView(), "Event saved", Snackbar.LENGTH_SHORT).show()
+    val drawable =   ContextCompat.getDrawable(requireContext(), R.drawable.ic_schedule)
+    Snackbar.make(requireView(), "Event added to the Schedule", Snackbar.LENGTH_SHORT).setIcon(drawable).show()
   }
 
   private fun displayEvents(eventsModel: List<EventDto>) {

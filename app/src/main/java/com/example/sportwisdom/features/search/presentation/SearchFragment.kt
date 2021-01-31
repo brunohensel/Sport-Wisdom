@@ -2,6 +2,7 @@ package com.example.sportwisdom.features.search.presentation
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import com.example.sportwisdom.features.search.domain.reducer.SearchIntents
 import com.example.sportwisdom.features.search.domain.state.SearchSyncState
 import com.example.sportwisdom.util.getTextAfterChangeAsFlow
 import com.example.sportwisdom.util.hideSoftKeyboard
+import com.example.sportwisdom.util.setIcon
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -47,7 +49,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
   private fun handleSideEffect() {
     progressBarSearch.isVisible = false
-    Snackbar.make(requireView(), "Team saved", Snackbar.LENGTH_SHORT).show()
+    val drawable =   ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite)
+    Snackbar.make(requireView(), "Team added to Favorites", Snackbar.LENGTH_SHORT).setIcon(drawable).show()
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
