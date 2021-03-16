@@ -6,8 +6,10 @@ import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.sportwisdom.CoroutineAndroidTestRule
-import com.example.sportwisdom.features.home.events.domain.model.EventDto
-import com.example.sportwisdom.features.search.domain.model.TeamDto
+import com.example.sportwisdom.data.local.room.SportWisdomDao
+import com.example.sportwisdom.data.local.room.SportWisdomDatabase
+import com.example.sportwisdom.domain.model.EventDto
+import com.example.sportwisdom.domain.model.TeamDto
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runBlockingTest
@@ -158,30 +160,30 @@ class SportWisdomDaoTest {
 
   private fun mockedEvents() = arrayListOf<EventDto>().apply {
     add(
-        EventDto(
-            idEvent = "1",
-            idLeague = "22",
-            strEvent = "Soccer",
-            strLeague = "Premier",
-            strThumb = "",
-            strTimestamp = "",
-            strVenue = "",
-            dateEvent = "",
-            strTime = ""
-        )
+      EventDto(
+        idEvent = "1",
+        idLeague = "22",
+        strEvent = "Soccer",
+        strLeague = "Premier",
+        strThumb = "",
+        strTimestamp = "",
+        strVenue = "",
+        dateEvent = "",
+        strTime = ""
+      )
     )
     add(
-        EventDto(
-            idEvent = "2",
-            idLeague = "12",
-            strEvent = "Basketball",
-            strLeague = "NBA",
-            strThumb = "",
-            strTimestamp = "",
-            strVenue = "",
-            dateEvent = "",
-            strTime = ""
-        )
+      EventDto(
+        idEvent = "2",
+        idLeague = "12",
+        strEvent = "Basketball",
+        strLeague = "NBA",
+        strThumb = "",
+        strTimestamp = "",
+        strVenue = "",
+        dateEvent = "",
+        strTime = ""
+      )
     )
   }
 
@@ -202,7 +204,8 @@ class SportWisdomDaoTest {
         strTeamJersey = "",
         strTeamLogo = "",
         strTeamBanner = ""
-      ))
+      )
+    )
     add(
       TeamDto(
         idTeam = "2",

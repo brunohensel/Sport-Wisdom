@@ -12,7 +12,7 @@
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
       android:theme="@style/Theme.SportWisdom">
-    <activity android:name=".features.dashboard.DashboardActivity">
+    <activity android:name="com.example.sportwisdom.dashboard.DashboardActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

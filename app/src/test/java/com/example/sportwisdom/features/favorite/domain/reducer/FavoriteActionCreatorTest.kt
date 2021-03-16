@@ -1,8 +1,8 @@
 package com.example.sportwisdom.features.favorite.domain.reducer
 
 import com.example.sportwisdom.common.utils.BaseAction
-import com.example.sportwisdom.features.favorite.data.FavoriteRepository
-import com.example.sportwisdom.features.search.domain.model.TeamDto
+import com.example.sportwisdom.domain.repository.FavoriteRepository
+import com.example.sportwisdom.domain.model.TeamDto
 import com.example.sportwisdom.utils.CoroutineTestRule
 import com.example.sportwisdom.utils.willReturn
 import com.google.common.truth.Truth
@@ -24,13 +24,13 @@ class FavoriteActionCreatorTest{
   @get:Rule
   var coroutinesTestRule = CoroutineTestRule()
 
-  private val repository: FavoriteRepository = mock()
-  private val actionCreator = FavoriteActionCreator(repository)
+  private val repository: com.example.sportwisdom.domain.repository.FavoriteRepository = mock()
+  private val actionCreator = com.example.sportwisdom.domain.reducer.favorite.FavoriteActionCreator(repository)
 
   @Test
   fun fetchCachedTeams_returnListOfEventDto_whenSuccess() = runBlockingTest {
     //Given
-    val intent = FavoriteIntents.FetchCachedTeams
+    val intent = com.example.sportwisdom.domain.reducer.favorite.FavoriteIntents.FetchCachedTeams
     val response = getTeams()
     repository.fetchCachedTeams() willReturn flowOf(BaseAction.RemoteSuccess(response))
 
@@ -46,7 +46,7 @@ class FavoriteActionCreatorTest{
   @Test
   fun fetchCachedTeams_returnFailed_whenError() = runBlockingTest {
     //Given
-    val intent = FavoriteIntents.FetchCachedTeams
+    val intent = com.example.sportwisdom.domain.reducer.favorite.FavoriteIntents.FetchCachedTeams
     val msg = "Unknown network error"
     whenever(repository.fetchCachedTeams()).thenReturn(flowOf(BaseAction.Failed(reason = msg)))
 
@@ -62,7 +62,7 @@ class FavoriteActionCreatorTest{
   @Test
   fun deleteAllTeams_returnUnit_whenSuccess() = runBlockingTest {
     //Give
-    val intent = FavoriteIntents.DeleteAllTeams
+    val intent = com.example.sportwisdom.domain.reducer.favorite.FavoriteIntents.DeleteAllTeams
     repository.deleteAllTeams() willReturn flowOf(BaseAction.CacheSuccess(Unit))
 
     //When
@@ -78,7 +78,7 @@ class FavoriteActionCreatorTest{
   fun deleteTeam_returnInt_whenSuccess() = runBlockingTest {
     //Given
     val teams = getTeams()
-    val intent = FavoriteIntents.DeleteTeam(teams.first().idTeam)
+    val intent = com.example.sportwisdom.domain.reducer.favorite.FavoriteIntents.DeleteTeam(teams.first().idTeam)
     repository.deleteTeam(teams.first().idTeam) willReturn flowOf(BaseAction.CacheSuccess(2))
 
     //When

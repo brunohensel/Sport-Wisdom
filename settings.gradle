@@ -1,3 +1,6 @@
+include ':features'
+include ':domain'
+include ':data'
 include ':common'
 include ':redux'
 include ':app'

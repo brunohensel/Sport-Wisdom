@@ -1,9 +1,8 @@
 package com.example.sportwisdom.features.schedule.domain.reducer
 
-import com.example.sportwisdom.common.utils.BaseAction
-import com.example.sportwisdom.features.home.events.domain.model.EventDto
-import com.example.sportwisdom.features.schedule.domain.state.ScheduleState
-import com.example.sportwisdom.features.schedule.domain.state.ScheduleSyncState
+import com.example.sportwisdom.domain.model.EventDto
+import com.example.sportwisdom.domain.reducer.schedule.state.ScheduleState
+import com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState
 import com.google.common.truth.Truth
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Test
@@ -14,28 +13,34 @@ class ScheduleReducerTest {
   fun loading_test() {
     //Given
     val action = com.example.sportwisdom.common.utils.BaseAction.Executing
-    val eventDto = flowOf(emptyList<EventDto>())
-    val currentState = ScheduleState(scheduleModel = eventDto, syncState = ScheduleSyncState.Content)
+    val eventDto = flowOf(emptyList<com.example.sportwisdom.domain.model.EventDto>())
+    val currentState = com.example.sportwisdom.domain.reducer.schedule.state.ScheduleState(
+      scheduleModel = eventDto,
+      syncState = com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Content
+    )
 
     //When
-    val newState = ScheduleReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.schedule.ScheduleReducer().invoke(currentState, action)
 
     //Then
-    Truth.assertThat(newState.syncState).isEqualTo(ScheduleSyncState.Loading)
+    Truth.assertThat(newState.syncState).isEqualTo(com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Loading)
   }
 
   @Test
   fun content_test() {
     //Given
-    val eventDto = flowOf(emptyList<EventDto>())
+    val eventDto = flowOf(emptyList<com.example.sportwisdom.domain.model.EventDto>())
     val action = com.example.sportwisdom.common.utils.BaseAction.CacheSuccess(eventDto)
-    val currentState = ScheduleState(eventDto, ScheduleSyncState.Loading)
+    val currentState = com.example.sportwisdom.domain.reducer.schedule.state.ScheduleState(
+      eventDto,
+      com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Loading
+    )
 
     //When
-    val newState = ScheduleReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.schedule.ScheduleReducer().invoke(currentState, action)
 
     //Then
-    Truth.assertThat(newState.syncState).isEqualTo(ScheduleSyncState.Content)
+    Truth.assertThat(newState.syncState).isEqualTo(com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Content)
     Truth.assertThat(newState.scheduleModel).isEqualTo(eventDto)
   }
 
@@ -44,14 +49,17 @@ class ScheduleReducerTest {
     //Given
     val message = "Error Test"
     val action = com.example.sportwisdom.common.utils.BaseAction.Failed(reason = message)
-    val eventDto = flowOf(emptyList<EventDto>())
-    val currentState = ScheduleState(eventDto, ScheduleSyncState.Loading)
+    val eventDto = flowOf(emptyList<com.example.sportwisdom.domain.model.EventDto>())
+    val currentState = com.example.sportwisdom.domain.reducer.schedule.state.ScheduleState(
+      eventDto,
+      com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Loading
+    )
 
     //When
-    val newState = ScheduleReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.schedule.ScheduleReducer().invoke(currentState, action)
 
     //Then
-    Truth.assertThat(newState.syncState).isEqualTo(ScheduleSyncState.Message(message))
+    Truth.assertThat(newState.syncState).isEqualTo(com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Message(message))
     Truth.assertThat(newState.scheduleModel).isEqualTo(eventDto)
   }
 
@@ -59,14 +67,17 @@ class ScheduleReducerTest {
   fun empty_test() {
     //Given
     val action = com.example.sportwisdom.common.utils.BaseAction.EmptyResult
-    val eventDto = flowOf(emptyList<EventDto>())
-    val currentState = ScheduleState(eventDto, ScheduleSyncState.Loading)
+    val eventDto = flowOf(emptyList<com.example.sportwisdom.domain.model.EventDto>())
+    val currentState = com.example.sportwisdom.domain.reducer.schedule.state.ScheduleState(
+      eventDto,
+      com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Loading
+    )
 
     //When
-    val newState = ScheduleReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.schedule.ScheduleReducer().invoke(currentState, action)
 
     //Then
-    Truth.assertThat(newState.syncState).isEqualTo(ScheduleSyncState.Empty)
+    Truth.assertThat(newState.syncState).isEqualTo(com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Empty)
     Truth.assertThat(newState.scheduleModel).isEqualTo(eventDto)
   }
 
@@ -74,14 +85,17 @@ class ScheduleReducerTest {
   fun sideEffect_test() {
     //Given
     val action = com.example.sportwisdom.common.utils.BaseAction.SideEffect(1)
-    val eventDto = flowOf(emptyList<EventDto>())
-    val currentState = ScheduleState(eventDto, ScheduleSyncState.Loading)
+    val eventDto = flowOf(emptyList<com.example.sportwisdom.domain.model.EventDto>())
+    val currentState = com.example.sportwisdom.domain.reducer.schedule.state.ScheduleState(
+      eventDto,
+      com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.Loading
+    )
 
     //When
-    val newState = ScheduleReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.schedule.ScheduleReducer().invoke(currentState, action)
 
     //Then
-    Truth.assertThat(newState.syncState).isEqualTo(ScheduleSyncState.SideEffect)
+    Truth.assertThat(newState.syncState).isEqualTo(com.example.sportwisdom.domain.reducer.schedule.state.ScheduleSyncState.SideEffect)
     Truth.assertThat(newState.scheduleModel).isEqualTo(eventDto)
   }
 }

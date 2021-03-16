@@ -1,10 +1,11 @@
 package com.example.sportwisdom.features.home.domain
 
 import com.example.sportwisdom.common.utils.BaseAction
-import com.example.sportwisdom.features.home.data.HomeRepository
-import com.example.sportwisdom.features.home.events.domain.model.EventDto
-import com.example.sportwisdom.features.home.league.domain.model.LeagueDto
-import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
+import com.example.sportwisdom.domain.repository.HomeRepository
+import com.example.sportwisdom.domain.model.EventDto
+import com.example.sportwisdom.domain.model.LeagueDto
+import com.example.sportwisdom.domain.model.SportsModel
+import com.example.sportwisdom.domain.reducer.home.HomeIntents.*
 import com.example.sportwisdom.utils.CoroutineTestRule
 import com.example.sportwisdom.utils.willReturn
 import com.google.common.truth.Truth.assertThat
@@ -29,14 +30,14 @@ class HomeActionCreatorTest {
   @get:Rule
   var coroutinesTestRule = CoroutineTestRule()
 
-  private val repository: HomeRepository = mock()
-  private val actionCreator = HomeActionCreator(repository)
+  private val repository: com.example.sportwisdom.domain.repository.HomeRepository = mock()
+  private val actionCreator = com.example.sportwisdom.domain.reducer.home.HomeActionCreator(repository)
 
   @Test
   fun fetchLeagues_returnListOfLeagueDto_whenSuccess() = runBlockingTest {
     //Given
     val sportType = "Soccer"
-    val event = HomeIntents.FetchLeagues(sportType)
+    val event = FetchLeagues(sportType)
     val leagues = arrayListOf<LeagueDto>().apply {
       add(LeagueDto("1", "A", "Soccer"))
       add(LeagueDto("2", "B", "Baseball"))
@@ -58,7 +59,7 @@ class HomeActionCreatorTest {
   fun fetchLeagues_returnFailed_whenError() = runBlockingTest {
     //Given
     val sportType = "soccer"
-    val event = HomeIntents.FetchLeagues(sportType)
+    val event = FetchLeagues(sportType)
     whenever(repository.fetchAllLeagues(sportType)).thenReturn(flowOf(BaseAction.Failed(null, "Unknown network error")))
 
     //When
@@ -73,7 +74,7 @@ class HomeActionCreatorTest {
   @Test
   fun fetchSports_returnSportModel_whenSuccess() = runBlockingTest {
     //Given
-    val event = HomeIntents.FetchSports
+    val event = FetchSports
     val response = SportsModel(emptyList())
     repository.fetchAllSports() willReturn flowOf(BaseAction.RemoteSuccess(response))
 
@@ -89,7 +90,7 @@ class HomeActionCreatorTest {
   @Test
   fun fetchSports_returnFailed_whenError() = runBlockingTest {
     //Given
-    val event = HomeIntents.FetchSports
+    val event = FetchSports
     whenever(repository.fetchAllSports()).thenReturn(flowOf(BaseAction.Failed(null, "Unknown network error")))
 
     //When
@@ -105,7 +106,7 @@ class HomeActionCreatorTest {
   fun fetchEvents_returnListOfEvents_whenSuccess() = runBlockingTest {
     //Given
     val leagueId = 4328
-    val event = HomeIntents.FetchEvents(leagueId)
+    val event = FetchEvents(leagueId)
     val response = listOf<EventDto>()
     repository.fetchEvents(leagueId) willReturn flowOf(BaseAction.RemoteSuccess(response))
 
@@ -122,7 +123,7 @@ class HomeActionCreatorTest {
   fun fetchEvents_returnFailed_whenError() = runBlockingTest {
     //Given
     val leagueId = 4328
-    val event = HomeIntents.FetchEvents(leagueId)
+    val event = FetchEvents(leagueId)
     whenever(repository.fetchEvents(leagueId)).thenReturn(flowOf(BaseAction.Failed(null, "Unknown network error")))
 
     //When
@@ -150,7 +151,7 @@ class HomeActionCreatorTest {
       dateTime = null
     )
 
-    val intent = HomeIntents.InsertEvent(eventDto)
+    val intent = InsertEvent(eventDto)
     repository.insertEvent(eventDto) willReturn flowOf(BaseAction.CacheSuccess(1L))
 
     //When

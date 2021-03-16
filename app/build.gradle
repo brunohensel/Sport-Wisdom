@@ -53,9 +53,11 @@ android {
 }
 
 dependencies {
-
-  implementation project(":redux")
   implementation project(":common")
+  implementation project(":data")
+  implementation project(path: ':domain')
+  implementation project(":features")
+  implementation project(":redux")
 
   //Kotlin and android
   Dependencies.baseLibs.forEach{implementation(it)}
@@ -80,8 +82,6 @@ dependencies {
 
   //Kapt
   AnnotationProcessing.kaptLib.forEach{kapt(it)}
-
-  kapt AnnotationProcessing.room_compiler
 
   //Unit tests
   TestDependencies.testImpLibList.forEach{testImplementation(it)}

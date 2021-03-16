@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.sportwisdom.features.home.sports.presentation.SportsFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/action_homeFragment_to_leagueFragment"
+            app:destination="@id/leagueFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/leagueFragment"
+        android:name="com.example.sportwisdom.features.home.league.presentation.LeagueFragment"
+        android:label="Leagues">
+
+        <argument
+            android:name="sportDto"
+            app:argType="com.example.sportwisdom.domain.model.SportDto" />
+        <action
+            android:id="@+id/action_leagueFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.sportwisdom.features.home.events.presentation.EventsFragment"
+        android:label="Events">
+        <argument
+            android:name="leagueId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.example.sportwisdom.features.schedule.presentation.ScheduleFragment"
+        android:label="Scheduled Events">
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.sportwisdom.features.search.presentation.SearchFragment"
+        android:label="Teams">
+        <action
+            android:id="@+id/action_searchFragment_to_teamDetailFragment"
+            app:destination="@id/teamDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamDetailFragment"
+        android:name="com.example.sportwisdom.features.search.presentation.TeamDetailFragment"
+        android:label="Detail" >
+
+        <argument
+            android:name="team"
+            app:argType="com.example.sportwisdom.domain.model.TeamDto"/>
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.sportwisdom.features.favorite.presentation.FavoriteFragment"
+        android:label="fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_teamDetailFragment"
+            app:destination="@id/teamDetailFragment" />
+    </fragment>
+</navigation>

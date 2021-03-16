@@ -1,0 +1,62 @@
+import dependencies.AndroidTestDependencies
+import dependencies.Dependencies
+import dependencies.TestDependencies
+
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation project(":redux")
+    implementation project(":common")
+
+    //Kotlin and android
+    Dependencies.baseLibs.forEach{implementation(it)}
+
+    //Dependency injection
+    Dependencies.hilLib.forEach{implementation(it)}
+
+    //Moshi
+    Dependencies.moshiLib.forEach{implementation(it)}
+
+    //Room
+    Dependencies.roomLib.forEach{implementation(it)}
+
+    //Unit tests
+    TestDependencies.testImpLibList.forEach{testImplementation(it)}
+    AndroidTestDependencies.androidTestImpLibList.forEach{androidTestImplementation(it)}
+
+    //Kapt
+    AnnotationProcessing.kaptLib.forEach{kapt(it)}
+}

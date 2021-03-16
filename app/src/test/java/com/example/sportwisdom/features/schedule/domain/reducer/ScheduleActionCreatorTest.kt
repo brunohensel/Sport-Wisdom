@@ -2,8 +2,8 @@ package com.example.sportwisdom.features.schedule.domain.reducer
 
 import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.utils.CoroutineTestRule
-import com.example.sportwisdom.features.home.events.domain.model.EventDto
-import com.example.sportwisdom.features.schedule.data.ScheduleRepository
+import com.example.sportwisdom.domain.model.EventDto
+import com.example.sportwisdom.domain.repository.ScheduleRepository
 import com.example.sportwisdom.utils.willReturn
 import com.google.common.truth.Truth.assertThat
 import com.nhaarman.mockitokotlin2.mock
@@ -25,13 +25,13 @@ class ScheduleActionCreatorTest {
   @get:Rule
   var coroutinesTestRule = CoroutineTestRule()
 
-  private val repository: ScheduleRepository = mock()
-  private val actionCreator = ScheduleActionCreator(repository)
+  private val repository: com.example.sportwisdom.domain.repository.ScheduleRepository = mock()
+  private val actionCreator = com.example.sportwisdom.domain.reducer.schedule.ScheduleActionCreator(repository)
 
   @Test
   fun fetchCachedEvents_returnListOfEventDto_whenSuccess() = runBlockingTest {
     //Given
-    val intent = ScheduleIntents.FetchCachedEvents
+    val intent = com.example.sportwisdom.domain.reducer.schedule.ScheduleIntents.FetchCachedEvents
     val response = getEvents()
     repository.fetchCachedEvents() willReturn flowOf(BaseAction.RemoteSuccess(response))
 
@@ -47,7 +47,7 @@ class ScheduleActionCreatorTest {
   @Test
   fun fetchCachedEvents_returnFailed_whenError() = runBlockingTest {
     //Given
-    val intent = ScheduleIntents.FetchCachedEvents
+    val intent = com.example.sportwisdom.domain.reducer.schedule.ScheduleIntents.FetchCachedEvents
     val msg = "Unknown network error"
     whenever(repository.fetchCachedEvents()).thenReturn(flowOf(BaseAction.Failed(reason = msg)))
 
@@ -63,7 +63,7 @@ class ScheduleActionCreatorTest {
   @Test
   fun deleteAllEvents_returnUnit_whenSuccess() = runBlockingTest {
     //Give
-    val intent = ScheduleIntents.DeleteAllEvents
+    val intent = com.example.sportwisdom.domain.reducer.schedule.ScheduleIntents.DeleteAllEvents
     repository.deleteAllEvents() willReturn flowOf(BaseAction.CacheSuccess(Unit))
 
     //When
@@ -79,7 +79,7 @@ class ScheduleActionCreatorTest {
   fun deleteEvent_returnInt_whenSuccess() = runBlockingTest {
     //Given
     val events = getEvents()
-    val intent = ScheduleIntents.DeleteEvent(events.first().idEvent)
+    val intent = com.example.sportwisdom.domain.reducer.schedule.ScheduleIntents.DeleteEvent(events.first().idEvent)
     repository.deleteEvent(events.first().idEvent) willReturn flowOf(BaseAction.CacheSuccess(2))
 
     //When

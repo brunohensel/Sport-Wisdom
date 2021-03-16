@@ -1,9 +1,8 @@
 package com.example.sportwisdom.features.home.sports.domain.reducer
 
-import com.example.sportwisdom.common.utils.BaseAction
-import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
-import com.example.sportwisdom.features.home.sports.domain.state.SportState
-import com.example.sportwisdom.features.home.sports.domain.state.SportSyncState
+import com.example.sportwisdom.domain.model.SportsModel
+import com.example.sportwisdom.domain.reducer.sports.state.SportState
+import com.example.sportwisdom.domain.reducer.sports.state.SportSyncState
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
@@ -13,11 +12,11 @@ class SportsReducerTest {
   fun loading_test() {
     //Given
     val action = com.example.sportwisdom.common.utils.BaseAction.Executing
-    val sports = SportsModel(emptyList())
+    val sports = com.example.sportwisdom.domain.model.SportsModel(emptyList())
     val currentState = SportState(sportsModel = sports, syncState = SportSyncState.Content)
 
     //When
-    val newState = SportsReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.sports.SportsReducer().invoke(currentState, action)
 
     //Then
     assertThat(newState.syncState).isEqualTo(SportSyncState.Loading)
@@ -26,12 +25,12 @@ class SportsReducerTest {
   @Test
   fun content_test(){
     //Given
-    val sports = SportsModel(emptyList())
+    val sports = com.example.sportwisdom.domain.model.SportsModel(emptyList())
     val action = com.example.sportwisdom.common.utils.BaseAction.RemoteSuccess(sports)
     val currentState = SportState(sports, SportSyncState.Loading)
 
     //When
-    val newState = SportsReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.sports.SportsReducer().invoke(currentState, action)
 
     //Then
     assertThat(newState.syncState).isEqualTo(SportSyncState.Content)
@@ -43,11 +42,11 @@ class SportsReducerTest {
     //Given
     val message = "Error Test"
     val action = com.example.sportwisdom.common.utils.BaseAction.Failed(reason = message)
-    val sports = SportsModel(emptyList())
+    val sports = com.example.sportwisdom.domain.model.SportsModel(emptyList())
     val currentState = SportState(sports, SportSyncState.Loading)
 
     //When
-    val newState = SportsReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.sports.SportsReducer().invoke(currentState, action)
 
     //Then
     assertThat(newState.syncState).isEqualTo(SportSyncState.Message(message))
@@ -58,11 +57,11 @@ class SportsReducerTest {
   fun empty_test() {
     //Given
     val action = com.example.sportwisdom.common.utils.BaseAction.EmptyResult
-    val sports = SportsModel(emptyList())
+    val sports = com.example.sportwisdom.domain.model.SportsModel(emptyList())
     val currentState = SportState(sports, SportSyncState.Loading)
 
     //When
-    val newState = SportsReducer().invoke(currentState, action)
+    val newState = com.example.sportwisdom.domain.reducer.sports.SportsReducer().invoke(currentState, action)
 
     //Then
     assertThat(newState.syncState).isEqualTo(SportSyncState.Empty)
