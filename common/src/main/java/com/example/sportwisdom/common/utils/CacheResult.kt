@@ -1,4 +1,4 @@
-package com.example.sportwisdom.base
+package com.example.sportwisdom.common.utils
 
 sealed class CacheResult<out T> {
 

@@ -1,6 +1,6 @@
 package com.example.sportwisdom.features.favorite.domain.reducer
 
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.favorite.domain.state.FavoriteState
 import com.example.sportwisdom.features.favorite.domain.state.FavoriteSyncState
 import com.example.sportwisdom.features.search.domain.model.TeamDto
@@ -13,7 +13,7 @@ class FavoriteReducerTest {
   @Test
   fun loading_test() {
     //Given
-    val action = BaseAction.Executing
+    val action = com.example.sportwisdom.common.utils.BaseAction.Executing
     val teams = flowOf(emptyList<TeamDto>())
     val currentState = FavoriteState(teams, syncState = FavoriteSyncState.Content)
 
@@ -28,7 +28,7 @@ class FavoriteReducerTest {
   fun content_test() {
     //Given
     val teams = flowOf(emptyList<TeamDto>())
-    val action = BaseAction.CacheSuccess(teams)
+    val action = com.example.sportwisdom.common.utils.BaseAction.CacheSuccess(teams)
     val currentState = FavoriteState(teams, FavoriteSyncState.Loading)
 
     //When
@@ -43,7 +43,7 @@ class FavoriteReducerTest {
   fun message_test() {
     //Given
     val message = "Error Test"
-    val action = BaseAction.Failed(reason = message)
+    val action = com.example.sportwisdom.common.utils.BaseAction.Failed(reason = message)
     val teams = flowOf(emptyList<TeamDto>())
     val currentState = FavoriteState(teams, FavoriteSyncState.Loading)
 
@@ -58,7 +58,7 @@ class FavoriteReducerTest {
   @Test
   fun empty_test() {
     //Given
-    val action = BaseAction.EmptyResult
+    val action = com.example.sportwisdom.common.utils.BaseAction.EmptyResult
     val teams = flowOf(emptyList<TeamDto>())
     val currentState = FavoriteState(teams, FavoriteSyncState.Loading)
 
@@ -73,7 +73,7 @@ class FavoriteReducerTest {
   @Test
   fun sideEffect_test() {
     //Given
-    val action = BaseAction.SideEffect(1)
+    val action = com.example.sportwisdom.common.utils.BaseAction.SideEffect(1)
     val teams = flowOf(emptyList<TeamDto>())
     val currentState = FavoriteState(teams, FavoriteSyncState.Loading)
 

@@ -1,6 +1,6 @@
 package com.example.sportwisdom.features.home.sports.domain.reducer
 
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.home.sports.domain.model.SportsModel
 import com.example.sportwisdom.features.home.sports.domain.state.SportState
 import com.example.sportwisdom.features.home.sports.domain.state.SportSyncState
@@ -12,7 +12,7 @@ class SportsReducerTest {
   @Test
   fun loading_test() {
     //Given
-    val action = BaseAction.Executing
+    val action = com.example.sportwisdom.common.utils.BaseAction.Executing
     val sports = SportsModel(emptyList())
     val currentState = SportState(sportsModel = sports, syncState = SportSyncState.Content)
 
@@ -27,7 +27,7 @@ class SportsReducerTest {
   fun content_test(){
     //Given
     val sports = SportsModel(emptyList())
-    val action = BaseAction.RemoteSuccess(sports)
+    val action = com.example.sportwisdom.common.utils.BaseAction.RemoteSuccess(sports)
     val currentState = SportState(sports, SportSyncState.Loading)
 
     //When
@@ -42,7 +42,7 @@ class SportsReducerTest {
   fun message_test() {
     //Given
     val message = "Error Test"
-    val action = BaseAction.Failed(reason = message)
+    val action = com.example.sportwisdom.common.utils.BaseAction.Failed(reason = message)
     val sports = SportsModel(emptyList())
     val currentState = SportState(sports, SportSyncState.Loading)
 
@@ -57,7 +57,7 @@ class SportsReducerTest {
   @Test
   fun empty_test() {
     //Given
-    val action = BaseAction.EmptyResult
+    val action = com.example.sportwisdom.common.utils.BaseAction.EmptyResult
     val sports = SportsModel(emptyList())
     val currentState = SportState(sports, SportSyncState.Loading)
 

@@ -1,6 +1,6 @@
 package com.example.sportwisdom.features.schedule.domain.reducer
 
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.schedule.domain.state.ScheduleState
 import com.example.sportwisdom.features.schedule.domain.state.ScheduleSyncState
@@ -13,7 +13,7 @@ class ScheduleReducerTest {
   @Test
   fun loading_test() {
     //Given
-    val action = BaseAction.Executing
+    val action = com.example.sportwisdom.common.utils.BaseAction.Executing
     val eventDto = flowOf(emptyList<EventDto>())
     val currentState = ScheduleState(scheduleModel = eventDto, syncState = ScheduleSyncState.Content)
 
@@ -28,7 +28,7 @@ class ScheduleReducerTest {
   fun content_test() {
     //Given
     val eventDto = flowOf(emptyList<EventDto>())
-    val action = BaseAction.CacheSuccess(eventDto)
+    val action = com.example.sportwisdom.common.utils.BaseAction.CacheSuccess(eventDto)
     val currentState = ScheduleState(eventDto, ScheduleSyncState.Loading)
 
     //When
@@ -43,7 +43,7 @@ class ScheduleReducerTest {
   fun message_test() {
     //Given
     val message = "Error Test"
-    val action = BaseAction.Failed(reason = message)
+    val action = com.example.sportwisdom.common.utils.BaseAction.Failed(reason = message)
     val eventDto = flowOf(emptyList<EventDto>())
     val currentState = ScheduleState(eventDto, ScheduleSyncState.Loading)
 
@@ -58,7 +58,7 @@ class ScheduleReducerTest {
   @Test
   fun empty_test() {
     //Given
-    val action = BaseAction.EmptyResult
+    val action = com.example.sportwisdom.common.utils.BaseAction.EmptyResult
     val eventDto = flowOf(emptyList<EventDto>())
     val currentState = ScheduleState(eventDto, ScheduleSyncState.Loading)
 
@@ -73,7 +73,7 @@ class ScheduleReducerTest {
   @Test
   fun sideEffect_test() {
     //Given
-    val action = BaseAction.SideEffect(1)
+    val action = com.example.sportwisdom.common.utils.BaseAction.SideEffect(1)
     val eventDto = flowOf(emptyList<EventDto>())
     val currentState = ScheduleState(eventDto, ScheduleSyncState.Loading)
 

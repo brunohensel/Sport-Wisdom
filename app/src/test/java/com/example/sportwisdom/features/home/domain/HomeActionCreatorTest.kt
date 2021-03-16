@@ -1,6 +1,6 @@
 package com.example.sportwisdom.features.home.domain
 
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.home.data.HomeRepository
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.home.league.domain.model.LeagueDto

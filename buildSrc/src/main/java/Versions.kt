@@ -31,4 +31,5 @@ object Versions {
     const val workManager_version = "2.4.0"
     const val arch_version = "2.1.0"
     const val threeten_version = "1.3.0"
+    const val legacySupportV4_version = "1.0.0"
 }

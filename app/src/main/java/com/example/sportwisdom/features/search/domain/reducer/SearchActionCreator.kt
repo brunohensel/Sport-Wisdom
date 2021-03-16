@@ -1,7 +1,7 @@
 package com.example.sportwisdom.features.search.domain.reducer
 
 import com.example.redux.Action
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.search.data.SearchRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow

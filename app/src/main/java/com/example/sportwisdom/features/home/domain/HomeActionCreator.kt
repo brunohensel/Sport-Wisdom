@@ -1,7 +1,7 @@
 package com.example.sportwisdom.features.home.domain
 
 import com.example.redux.Action
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.home.data.HomeRepository
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow

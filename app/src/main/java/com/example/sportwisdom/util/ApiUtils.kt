@@ -1,6 +1,6 @@
 package com.example.sportwisdom.util
 
-import com.example.sportwisdom.base.ApiResult
+import com.example.sportwisdom.common.utils.ApiResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withContext

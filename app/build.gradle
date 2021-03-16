@@ -55,78 +55,37 @@ android {
 dependencies {
 
   implementation project(":redux")
+  implementation project(":common")
 
-  //Kotlin
-  implementation Dependencies.kotlin_standard_library
-  implementation Dependencies.ktx
-  implementation Dependencies.coroutines_core
-  implementation Dependencies.coroutines_android
-  implementation Dependencies.mockito_kotlin
+  //Kotlin and android
+  Dependencies.baseLibs.forEach{implementation(it)}
 
   //Architecture component ktx scopes
-  implementation Dependencies.viewModel_scope
-  implementation Dependencies.lifecycle_scope
+  Dependencies.lifecycleLib.forEach{implementation(it)}
 
   //Support
-  implementation SupportDependencies.appcompat
-  implementation SupportDependencies.material_design
-  implementation SupportDependencies.constraintlayout
-  implementation SupportDependencies.activity_ktx
-  implementation SupportDependencies.fragment_ktx
+  SupportDependencies.supportLibs.forEach{implementation(it)}
 
   //Network dependencies
-  implementation Dependencies.retrofit
-  implementation Dependencies.moshi_converter
-  implementation Dependencies.okhttp
-  implementation Dependencies.okhttp_log
+  Dependencies.networkLib.forEach{implementation(it)}
 
   //Moshi
-  implementation Dependencies.moshi_kotlin
-  implementation Dependencies.moshi_std
-  implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  kapt AnnotationProcessing.moshi_cogen
+  Dependencies.moshiLib.forEach{implementation(it)}
 
   //Dependency injection
-  kapt AnnotationProcessing.dagger_hilt_android_compiler
-  kapt AnnotationProcessing.dagger_hilt_compiler
-  implementation Dependencies.dagger_hilt
-  implementation Dependencies.dagger_hilt_viewModel
-
-  //Log
-  implementation Dependencies.timber
-
-  //Navigation
-  implementation Dependencies.navigation_fragment
-  implementation Dependencies.navigation_ktx
-
-  //Image loader
-  implementation Dependencies.coil
-
-  //LayoutManager
-  implementation Dependencies.flexbox
-
-  //WorkManager
-  implementation Dependencies.workerManager
-
-  //ThreeTenBp - Date
-  implementation Dependencies.threetenabp
+  Dependencies.hilLib.forEach{implementation(it)}
 
   //Room
-  implementation Dependencies.room
-  implementation Dependencies.room_ktx
+  Dependencies.roomLib.forEach{implementation(it)}
+
+  //Kapt
+  AnnotationProcessing.kaptLib.forEach{kapt(it)}
+
   kapt AnnotationProcessing.room_compiler
 
   //Unit tests
-  testImplementation TestDependencies.junit4
-  testImplementation TestDependencies.mockito_inline_testing
-  testImplementation TestDependencies.room_testing
-  testImplementation TestDependencies.coroutines_testing
-  testImplementation TestDependencies.truth_testing
-  androidTestImplementation AndroidTestDependencies.junit_ext
-  androidTestImplementation AndroidTestDependencies.espresso_core
-  androidTestImplementation AndroidTestDependencies.workManager
-  androidTestImplementation AndroidTestDependencies.arch_test
-  androidTestImplementation AndroidTestDependencies.coroutine_android_test
-  androidTestImplementation AndroidTestDependencies.room_android_test
+  TestDependencies.testImpLibList.forEach{testImplementation(it)}
+
+  AndroidTestDependencies.androidTestImpLibList.forEach{androidTestImplementation(it)}
+
 }

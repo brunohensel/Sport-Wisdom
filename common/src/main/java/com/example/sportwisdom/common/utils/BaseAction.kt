@@ -1,4 +1,4 @@
-package com.example.sportwisdom.base
+package com.example.sportwisdom.common.utils
 
 sealed class BaseAction<out T> {
   object Executing : BaseAction<Nothing>()

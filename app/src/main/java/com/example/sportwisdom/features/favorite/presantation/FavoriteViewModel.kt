@@ -1,8 +1,8 @@
 package com.example.sportwisdom.features.favorite.presantation
 
 import androidx.hilt.lifecycle.ViewModelInject
-import com.example.sportwisdom.base.BaseAction
-import com.example.sportwisdom.base.BaseStateViewModel
+import com.example.sportwisdom.common.utils.BaseAction
+import com.example.sportwisdom.common.utils.BaseStateViewModel
 import com.example.sportwisdom.features.favorite.domain.reducer.FavoriteActionCreator
 import com.example.sportwisdom.features.favorite.domain.reducer.FavoriteIntents
 import com.example.sportwisdom.features.favorite.domain.reducer.FavoriteReducer
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.flowOf
 class FavoriteViewModel @ViewModelInject constructor(
   reducer: FavoriteReducer,
   actionCreator: FavoriteActionCreator
-) : BaseStateViewModel<FavoriteState, FavoriteIntents, BaseAction<*>>(
+) : com.example.sportwisdom.common.utils.BaseStateViewModel<FavoriteState, FavoriteIntents, com.example.sportwisdom.common.utils.BaseAction<*>>(
   initialState = FavoriteState(favoriteModel = flowOf(emptyList()), syncState = FavoriteSyncState.Content),
   reducer = reducer,
   action = actionCreator

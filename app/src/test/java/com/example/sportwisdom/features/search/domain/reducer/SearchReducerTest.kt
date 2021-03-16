@@ -1,6 +1,6 @@
 package com.example.sportwisdom.features.search.domain.reducer
 
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.search.domain.model.TeamDto
 import com.example.sportwisdom.features.search.domain.state.SearchState
 import com.example.sportwisdom.features.search.domain.state.SearchSyncState
@@ -11,7 +11,7 @@ class SearchReducerTest {
   @Test
   fun loading_test() {
     //Given
-    val action = BaseAction.Executing
+    val action = com.example.sportwisdom.common.utils.BaseAction.Executing
     val teamDto = emptyList<TeamDto>()
     val currentState = SearchState(teamsModel = teamDto, syncState = SearchSyncState.Content)
 
@@ -26,7 +26,7 @@ class SearchReducerTest {
   fun content_test() {
     //Given
     val teamDto = emptyList<TeamDto>()
-    val action = BaseAction.RemoteSuccess(teamDto)
+    val action = com.example.sportwisdom.common.utils.BaseAction.RemoteSuccess(teamDto)
     val currentState = SearchState(teamDto, SearchSyncState.Loading)
 
     //When
@@ -41,7 +41,7 @@ class SearchReducerTest {
   fun message_test() {
     //Given
     val message = "Error Test"
-    val action = BaseAction.Failed(reason = message)
+    val action = com.example.sportwisdom.common.utils.BaseAction.Failed(reason = message)
     val teamDto = emptyList<TeamDto>()
     val currentState = SearchState(teamDto, SearchSyncState.Loading)
 
@@ -56,7 +56,7 @@ class SearchReducerTest {
   @Test
   fun empty_test() {
     //Given
-    val action = BaseAction.EmptyResult
+    val action = com.example.sportwisdom.common.utils.BaseAction.EmptyResult
     val teamDto = emptyList<TeamDto>()
     val currentState = SearchState(teamDto, SearchSyncState.Loading)
 
@@ -71,7 +71,7 @@ class SearchReducerTest {
   @Test
   fun sideEffect_test() {
     //Given
-    val action = BaseAction.SideEffect(1)
+    val action = com.example.sportwisdom.common.utils.BaseAction.SideEffect(1)
     val teamDto = emptyList<TeamDto>()
     val currentState = SearchState(teamDto, SearchSyncState.Loading)
 

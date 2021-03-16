@@ -1,4 +1,4 @@
-package com.example.sportwisdom.base
+package com.example.sportwisdom.common.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

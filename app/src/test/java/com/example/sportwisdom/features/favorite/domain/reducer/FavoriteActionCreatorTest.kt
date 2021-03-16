@@ -1,11 +1,7 @@
 package com.example.sportwisdom.features.favorite.domain.reducer
 
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.favorite.data.FavoriteRepository
-import com.example.sportwisdom.features.home.events.domain.model.EventDto
-import com.example.sportwisdom.features.schedule.data.ScheduleRepository
-import com.example.sportwisdom.features.schedule.domain.reducer.ScheduleActionCreator
-import com.example.sportwisdom.features.schedule.domain.reducer.ScheduleIntents
 import com.example.sportwisdom.features.search.domain.model.TeamDto
 import com.example.sportwisdom.utils.CoroutineTestRule
 import com.example.sportwisdom.utils.willReturn

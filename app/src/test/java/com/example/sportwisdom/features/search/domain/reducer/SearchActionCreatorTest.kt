@@ -1,6 +1,6 @@
 package com.example.sportwisdom.features.search.domain.reducer
 
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.features.search.data.SearchRepository
 import com.example.sportwisdom.features.search.domain.model.TeamDto
 import com.example.sportwisdom.utils.CoroutineTestRule

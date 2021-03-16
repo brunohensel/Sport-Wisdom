@@ -1,6 +1,6 @@
 package com.example.sportwisdom.features.schedule.domain.reducer
 
-import com.example.sportwisdom.base.BaseAction
+import com.example.sportwisdom.common.utils.BaseAction
 import com.example.sportwisdom.utils.CoroutineTestRule
 import com.example.sportwisdom.features.home.events.domain.model.EventDto
 import com.example.sportwisdom.features.schedule.data.ScheduleRepository
