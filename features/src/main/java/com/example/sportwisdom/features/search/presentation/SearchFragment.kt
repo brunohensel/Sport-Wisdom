@@ -11,6 +11,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.sportwisdom.common.utils.getTextAfterChangeAsFlow
 import com.example.sportwisdom.common.utils.hideSoftKeyboard
 import com.example.sportwisdom.common.utils.setIcon
+import com.example.sportwisdom.domain.model.TeamDto
+import com.example.sportwisdom.domain.reducer.search.SearchIntents.AddToFavorites
+import com.example.sportwisdom.domain.reducer.search.SearchIntents.SearchForTeamsByName
 import com.example.sportwisdom.domain.reducer.search.state.SearchSyncState.*
 import com.example.sportwisdom.features.R
 import com.google.android.material.snackbar.Snackbar
@@ -61,7 +64,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         .filter { it.isNotEmpty() }
         .debounce(800)
         .map { query ->
-          viewModel.process(flowOf(com.example.sportwisdom.domain.reducer.search.SearchIntents.SearchForTeamsByName(query)))
+          viewModel.process(flowOf(SearchForTeamsByName(query)))
           imgClearText.isVisible = query.isNotEmpty()
           if (query.isEmpty()) {
             requireActivity().hideSoftKeyboard()
@@ -73,20 +76,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     imgClearText.setOnClickListener { edtSearchTeam.text.clear() }
   }
 
-  private fun displayTeams(teamsModel: List<com.example.sportwisdom.domain.model.TeamDto>) {
+  private fun displayTeams(teamsModel: List<TeamDto>) {
     rvSearchTeams.isVisible = true
     requireActivity().hideSoftKeyboard()
     progressBarSearch.isVisible = false
     searchAdapter.submitList(teamsModel)
   }
 
-  private fun addToFavorite(teamDto: com.example.sportwisdom.domain.model.TeamDto) {
+  private fun addToFavorite(teamDto: TeamDto) {
     lifecycleScope.launch {
-      viewModel.process(flowOf(com.example.sportwisdom.domain.reducer.search.SearchIntents.AddToFavorites(teamDto)))
+      viewModel.process(flowOf(AddToFavorites(teamDto)))
     }
   }
 
-  private fun openDetail(teamDto: com.example.sportwisdom.domain.model.TeamDto) {
+  private fun openDetail(teamDto: TeamDto) {
     edtSearchTeam.text.clear()
     val action = SearchFragmentDirections.actionSearchFragmentToTeamDetailFragment(teamDto)
     findNavController().navigate(action)

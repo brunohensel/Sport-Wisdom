@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.sportwisdom.domain.model.SportDto
 import com.example.sportwisdom.domain.reducer.home.HomeIntents.FetchSports
 import com.example.sportwisdom.domain.reducer.sports.state.SportSyncState
 import com.example.sportwisdom.features.R
@@ -53,7 +54,7 @@ class SportsFragment : Fragment(R.layout.fragment_home) {
     progressBar.isVisible = false
   }
 
-  private fun displayAllSports(sports: List<com.example.sportwisdom.domain.model.SportDto>) {
+  private fun displayAllSports(sports: List<SportDto>) {
     progressBar.isVisible = false
     homeAdapter.submitList(sports)
   }
@@ -63,7 +64,7 @@ class SportsFragment : Fragment(R.layout.fragment_home) {
     Snackbar.make(requireView(), msg ?: "Unknown error", Snackbar.LENGTH_LONG).show()
   }
 
-  private fun onItemClicked(sportType: com.example.sportwisdom.domain.model.SportDto) {
+  private fun onItemClicked(sportType: SportDto) {
     val action = SportsFragmentDirections.actionHomeFragmentToLeagueFragment(sportType)
     findNavController().navigate(action)
   }
