@@ -1,5 +1,6 @@
 import dependencies.AndroidTestDependencies
 import dependencies.Dependencies
+import dependencies.SupportDependencies
 import dependencies.TestDependencies
 
 plugins {
@@ -12,6 +13,11 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
 
     defaultConfig {
         minSdkVersion 22
@@ -48,9 +54,11 @@ dependencies {
     implementation project(":common")
     implementation project(":domain")
 
-
     //Kotlin and android
     Dependencies.baseLibs.forEach{implementation(it)}
+
+    //Support
+    SupportDependencies.supportLibs.forEach{implementation(it)}
 
     //Network dependencies
     Dependencies.networkLib.forEach{implementation(it)}

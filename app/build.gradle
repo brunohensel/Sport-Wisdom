@@ -14,7 +14,7 @@ plugins {
 
 android {
   compileSdkVersion Versions.compileSdk
-  buildToolsVersion "30.0.2"
+  buildToolsVersion "30.0.3"
 
   packagingOptions {
     exclude 'META-INF/AL2.0'
